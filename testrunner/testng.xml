@@ -1,0 +1,9 @@
+<suite name="Main Suite">
+    <test thread-count="5" name="TestAutomationFramework">
+        <classes>
+            <class name="testcase.MyFirstTestFW"/>
+        </classes>
+    </test>
+<!--  TestAutomationFramework  -->
+</suite>
+<!--  Main Suite  -->
