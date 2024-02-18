@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import utilities.ReadXlsData;
 
-public class MyFirstTestFW extends BaseTest {
+public class MyFirstTestFw extends BaseTest {
     @Test (dataProviderClass = ReadXlsData.class, dataProvider = "testData")
     public static void LoginTest(String username, String password) {
         System.out.println("Click on Sign in Button");
