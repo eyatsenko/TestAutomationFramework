@@ -17,47 +17,48 @@ public class BaseTest {
     public static WebDriver driver;
     public static Properties prop = new Properties();
     public static Properties locators = new Properties();
-    private FileReader fileReaderProperties;
-    private FileReader fileReaderLocators;
 
     @BeforeTest
-    public void setUp () throws IOException {
-        if (driver == null) {
-            fileReaderProperties = new FileReader( System.getProperty("user.dir") + "\\src\\test\\resources\\configfiles\\config.properties");
-//            fileReaderLocators = new FileReader( System.getProperty("user.dir") + "\\src\\test\\resources\\locators.properties");
-            prop.load(fileReaderProperties);
-//            locators.load(fileReaderLocators);
-        }
-
-        switch (prop.getProperty("browser")) {
-            case "firefox": {
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                driver.manage().window().maximize();
-                driver.get(prop.getProperty("testurl"));
-                break;
+    public void setUp () {
+        String propFileName = System.getProperty("user.dir") + "\\src\\test\\resources\\configfiles\\config.properties";
+        String locatorsFileName = System.getProperty("user.dir") + "\\src\\test\\resources\\configfiles\\locators.properties";
+        try (FileReader fileReaderProperties = new FileReader(propFileName); FileReader fileReaderLocators = new FileReader(locatorsFileName)) {
+            if (driver == null) {
+                prop.load(fileReaderProperties);
+                locators.load(fileReaderLocators);
             }
-            case "safari": {
-                WebDriverManager.safaridriver().setup();
-                driver = new SafariDriver();
-                driver.manage().window().maximize();
-                driver.get(prop.getProperty("testurl"));
-                break;
+            switch (prop.getProperty("browser")) {
+                case "firefox": {
+                    WebDriverManager.firefoxdriver().setup();
+                    driver = new FirefoxDriver();
+                    driver.manage().window().maximize();
+                    driver.get(prop.getProperty("testurl"));
+                    break;
+                }
+                case "safari": {
+                    WebDriverManager.safaridriver().setup();
+                    driver = new SafariDriver();
+                    driver.manage().window().maximize();
+                    driver.get(prop.getProperty("testurl"));
+                    break;
+                }
+                case "edge": {
+                    WebDriverManager.edgedriver().setup();
+                    driver = new EdgeDriver();
+                    driver.manage().window().maximize();
+                    driver.get(prop.getProperty("testurl"));
+                    break;
+                }
+                default: {
+                    WebDriverManager.chromedriver().setup();
+                    driver = new ChromeDriver();
+                    driver.manage().window().maximize();
+                    driver.get(prop.getProperty("testurl"));
+                    break;
+                }
             }
-            case "edge": {
-                WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
-                driver.manage().window().maximize();
-                driver.get(prop.getProperty("testurl"));
-                break;
-            }
-            default: {
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                driver.manage().window().maximize();
-                driver.get(prop.getProperty("testurl"));
-                break;
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
