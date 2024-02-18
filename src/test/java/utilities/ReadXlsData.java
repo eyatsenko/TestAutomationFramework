@@ -4,23 +4,21 @@ import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.testng.annotations.DataProvider;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 public class ReadXlsData {
-    public static void main(String[] args) throws IOException {
-        ReadXlsData rxd = new ReadXlsData();
-        rxd.getData("login");
-    }
-
-    public String[][] getData(String excelSheetName) throws IOException {
+    @DataProvider(name = "testData")
+    public String[][] getData(Method m) throws IOException {
         File f = new File(System.getProperty("user.dir") + "\\src\\test\\resources\\testdata\\testdata.xlsx");
         FileInputStream fis = new FileInputStream(f);
 
         Workbook wb = WorkbookFactory.create(fis);
-        Sheet sheet = wb.getSheet(excelSheetName);
+        Sheet sheet = wb.getSheet(m.getName());
 
         int totalRows = sheet.getLastRowNum();
         int totalCols = sheet.getRow(0).getLastCellNum();

@@ -2,11 +2,11 @@ package testcase;
 
 import base.BaseTest;
 import org.openqa.selenium.By;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utilities.ReadXlsData;
 
 public class MyFirstTestFW extends BaseTest {
-    @Test (dataProvider = "testData")
+    @Test (dataProviderClass = ReadXlsData.class, dataProvider = "testData")
     public static void LoginTest(String username, String password) {
         System.out.println("Click on Sign in Button");
         driver.findElement(By.partialLinkText(locators.getProperty("signin_link"))).click();
@@ -22,12 +22,5 @@ public class MyFirstTestFW extends BaseTest {
 
         System.out.println("Click on Next button");
         driver.findElement(By.xpath(locators.getProperty("login_next_button"))).click();
-    }
-
-    @DataProvider(name = "testData")
-    public Object[][] tData() {
-        return new Object[][]{
-                {"eduardyacenko@gmail.com", "Apriorit!1672"}
-        };
     }
 }
