@@ -16,16 +16,13 @@ import java.util.Properties;
 public class BaseTest {
     public static WebDriver driver;
     public static Properties prop = new Properties();
-    public static Properties locators = new Properties();
 
     @BeforeTest
     public void setUp () {
         String propFileName = System.getProperty("user.dir") + "\\src\\test\\resources\\configfiles\\config.properties";
-        String locatorsFileName = System.getProperty("user.dir") + "\\src\\test\\resources\\configfiles\\locators.properties";
-        try (FileReader fileReaderProperties = new FileReader(propFileName); FileReader fileReaderLocators = new FileReader(locatorsFileName)) {
+        try (FileReader fileReaderProperties = new FileReader(propFileName)) {
             if (driver == null) {
                 prop.load(fileReaderProperties);
-                locators.load(fileReaderLocators);
             }
             switch (prop.getProperty("browser")) {
                 case "firefox": {
