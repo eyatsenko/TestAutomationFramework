@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -16,6 +18,7 @@ import java.util.Properties;
 public class BaseTest {
     public static WebDriver driver;
     public static Properties prop = new Properties();
+    private static final Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
     @BeforeTest
     public void setUp () {
@@ -55,13 +58,13 @@ public class BaseTest {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
     @AfterTest
     public void tearDown () {
         driver.quit();
-        System.out.println("Driver has been closed!");
+        logger.info("Driver has been closed!");
     }
 }
