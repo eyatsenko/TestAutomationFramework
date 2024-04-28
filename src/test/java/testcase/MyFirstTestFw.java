@@ -8,15 +8,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import utilities.ReadXlsData;
 
 import java.time.Duration;
 
 public class MyFirstTestFw extends BaseTest {
     private static final Logger logger = LoggerFactory.getLogger(MyFirstTestFw.class);
 
-    @Test (dataProviderClass = ReadXlsData.class, dataProvider = "testData")
+    @Test (dataProvider = "testData")
     public static void LoginTest(String username, String password) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         logger.info("Click on Sign in Button");
@@ -45,19 +45,21 @@ public class MyFirstTestFw extends BaseTest {
         Assert.assertEquals(driver.getTitle(), "Explore All Products | Zoho");
 
         logger.info("Click on Profile button");
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/main/div[@class='zw-template-inner']/" +
-                "div[@class='zh-main']/" +
-                "div[@class='load-header']/div[@class='zh-header']/div[@class='zh-wrap']/div[@class='zgh-left-nav']/" +
-                "div[@class='flx zh-utilities']/div[@class='head-sign-in zh_innr_nav']/div[@class='zgh-user-box']" +
-                "/div[@class='zgh-userPanel']/img[1]")));
-        driver.findElement(By.xpath("//body/main/div[@class='zw-template-inner']/div[@class='zh-main']/" +
-                "div[@class='load-header']/div[@class='zh-header']/div[@class='zh-wrap']/div[@class='zgh-left-nav']/" +
-                "div[@class='flx zh-utilities']/div[@class='head-sign-in zh_innr_nav']/div[@class='zgh-user-box']" +
-                "/div[@class='zgh-userPanel']/img[1]")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='head-sign-in zh_innr_nav']" +
+                "                                   /div[@class='zgh-user-box']/div[@class='zgh-userPanel']/img[1]")));
+        driver.findElement(By.xpath("//div[@class='head-sign-in zh_innr_nav']" +
+                "                           /div[@class='zgh-user-box']/div[@class='zgh-userPanel']/img[1]")).click();
 
         logger.info("Click on Logout button");
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='zgh-userPanel active']" +
                                                                                 "//a[normalize-space()='Sign Out']")));
         driver.findElement(By.xpath("//div[@class='zgh-userPanel active']//a[normalize-space()='Sign Out']")).click();
+    }
+
+    @DataProvider(name = "testData")
+    public String[][] getTestData() {
+        return new String[][] {
+                {"eduardyacenko@gmail.com", "Apriorit!1672"},
+        };
     }
 }
