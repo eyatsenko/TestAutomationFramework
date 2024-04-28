@@ -21,7 +21,7 @@ public class BaseTest {
     private static final Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
     @BeforeTest
-    public void setUp () {
+    public void setUp() {
         String propFileName = System.getProperty("user.dir") + "\\src\\test\\resources\\configfiles\\config.properties";
         try (FileReader fileReaderProperties = new FileReader(propFileName)) {
             if (driver == null) {
@@ -31,29 +31,25 @@ public class BaseTest {
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
-                    driver.manage().window().maximize();
-                    driver.get(prop.getProperty("testurl"));
+                    maximizeAndOpenUrl();
                     break;
                 }
                 case "safari": {
                     WebDriverManager.safaridriver().setup();
                     driver = new SafariDriver();
-                    driver.manage().window().maximize();
-                    driver.get(prop.getProperty("testurl"));
+                    maximizeAndOpenUrl();
                     break;
                 }
                 case "edge": {
                     WebDriverManager.edgedriver().setup();
                     driver = new EdgeDriver();
-                    driver.manage().window().maximize();
-                    driver.get(prop.getProperty("testurl"));
+                    maximizeAndOpenUrl();
                     break;
                 }
                 default: {
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
-                    driver.manage().window().maximize();
-                    driver.get(prop.getProperty("testurl"));
+                    maximizeAndOpenUrl();
                     break;
                 }
             }
@@ -62,8 +58,13 @@ public class BaseTest {
         }
     }
 
+    public void maximizeAndOpenUrl() {
+        driver.manage().window().maximize();
+        driver.get(prop.getProperty("testurl"));
+    }
+
     @AfterTest
-    public void tearDown () {
+    public void tearDown() {
         driver.quit();
         logger.info("Driver has been closed!");
     }
