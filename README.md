@@ -5,7 +5,7 @@ TestAutomationFramework is a Java-based testing framework designed for automatin
 - Ability to write test scenarios using TestNG.
 - Built-in support for interacting with web elements using Selenium WebDriver.
 - Configurability and extensibility to adapt to the needs of a specific project.
-- Integration with build systems such as Maven or Gradle to automate the build process and test execution.
+- Integration with build system Maven to automate the build process and test execution.
 
 **Installation and Usage:**
 1. Clone the repository to your local machine.
