@@ -21,27 +21,27 @@ public class Example extends BaseWeb {
         mainPage.clickSignInLink();
 
         var loginPage = new LoginPage();
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         logger.info("Enter email");
         loginPage.fillEmail(username);
 
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         logger.info("Click on next button");
         loginPage.clickNextButton();
 
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         logger.info("Enter password");
         loginPage.fillPassword(password);
 
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         logger.info("Click on Sign in button");
         loginPage.clickSignInButton();
 
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         logger.info("Click on Profile button");
         loginPage.clickProfileButton();
 
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         logger.info("Click on Logout button");
         loginPage.clickLogoutButton();
     }
