@@ -1,6 +1,7 @@
 package com.example.testcase;
 
 import com.example.base.BaseTest;
+import com.example.driver.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,7 +17,7 @@ import java.time.Duration;
 public class MyFirstTestFw extends BaseTest {
     private static final Logger logger = LoggerFactory.getLogger(MyFirstTestFw.class);
 
-    @Test (dataProvider = "testData")
+    @Test (dataProvider = "testData", dataProviderClass = DataProvider1.class)
     public static void LoginTest(String username, String password) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         logger.info("Click on Sign in Button");
@@ -53,12 +54,7 @@ public class MyFirstTestFw extends BaseTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='zgh-userPanel active']" +
                                                                                 "//a[normalize-space()='Sign Out']")));
         driver.findElement(By.xpath("//div[@class='zgh-userPanel active']//a[normalize-space()='Sign Out']")).click();
-    }
-
-    @DataProvider(name = "testData")
-    public String[][] getTestData() {
-        return new String[][] {
-                {"eduardyacenko@gmail.com", "Apriorit!1672"},
-        };
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Assert.assertEquals(driver.getTitle(), "Zoho | Cloud Software Suite for Businesses");
     }
 }
