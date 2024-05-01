@@ -1,6 +1,6 @@
-package testcase;
+package com.example.testcase;
 
-import base.BaseTest;
+import com.example.base.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,17 +38,16 @@ public class MyFirstTestFw extends BaseTest {
         driver.findElement(By.xpath("//input[@id='password']")).sendKeys(password);
 
         logger.info("Click on Next button");
-        WebElement nextBtn = wait.until(ExpectedConditions.elementToBeClickable(By
-                                                .xpath("//button[@id='nextbtn']//span[contains(text(),'Sign in')]")));
+        WebElement nextBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='nextbtn']")));
         nextBtn.click();
         wait.until(ExpectedConditions.titleContains("Explore All Products | Zoho"));
         Assert.assertEquals(driver.getTitle(), "Explore All Products | Zoho");
 
         logger.info("Click on Profile button");
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='head-sign-in zh_innr_nav']" +
-                "                                   /div[@class='zgh-user-box']/div[@class='zgh-userPanel']/img[1]")));
+                                                "/div[@class='zgh-user-box']/div[@class='zgh-userPanel']/img[1]")));
         driver.findElement(By.xpath("//div[@class='head-sign-in zh_innr_nav']" +
-                "                           /div[@class='zgh-user-box']/div[@class='zgh-userPanel']/img[1]")).click();
+                                            "/div[@class='zgh-user-box']/div[@class='zgh-userPanel']/img[1]")).click();
 
         logger.info("Click on Logout button");
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='zgh-userPanel active']" +
