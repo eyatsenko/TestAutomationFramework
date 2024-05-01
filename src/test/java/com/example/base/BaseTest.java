@@ -22,7 +22,7 @@ public class BaseTest {
 
     @BeforeTest
     public void setUp() {
-        String propFileName = System.getProperty("user.dir") + "\\src\\test\\resources\\configfiles\\config.properties";
+        String propFileName = System.getProperty("user.dir") + "\\src\\test\\resources\\general.properties";
         try (FileReader fileReaderProperties = new FileReader(propFileName)) {
             if (driver == null) {
                 prop.load(fileReaderProperties);
@@ -60,7 +60,7 @@ public class BaseTest {
 
     public void maximizeAndOpenUrl() {
         driver.manage().window().maximize();
-        driver.get(prop.getProperty("testurl"));
+        driver.get(prop.getProperty("url.base"));
     }
 
     @AfterTest
