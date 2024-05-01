@@ -9,7 +9,8 @@ public class MainPage extends AbstractPageObject {
     private WebElement signInLink;
 
     @Step
-    public void clickSignInLink() {
+    public MainPage clickSignInLink() {
         this.signInLink.click();
+        return this;
     }
 }

@@ -44,6 +44,23 @@ public class Example extends BaseWeb {
         DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         logger.info("Click on Logout button");
         loginPage.clickLogoutButton();
+/*
+        Using Fluent Interface Pattern:
+        loginPage
+                .clickSignInButton()
+                .wait(5)
+                .fillEmail(username)
+                .wait(5)
+                .clickNextButton()
+                .wait(5)
+                .fillPassword(password)
+                .wait(5)
+                .clickSignInButton()
+                .wait(5)
+                .clickProfileButton()
+                .wait(5)
+                .clickLogoutButton();
+        */
     }
 
     @DataProvider(name = "testData")
