@@ -1,7 +1,6 @@
 package com.example.testcase;
 
 import com.example.base.BaseTest;
-import com.example.driver.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -55,6 +53,6 @@ public class MyFirstTestFw extends BaseTest {
                                                                                 "//a[normalize-space()='Sign Out']")));
         driver.findElement(By.xpath("//div[@class='zgh-userPanel active']//a[normalize-space()='Sign Out']")).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        Assert.assertEquals(driver.getTitle(), "Zoho | Cloud Software Suite for Businesses");
+        Assert.assertEquals(driver.getTitle(), "Explore All Products | Zoho");
     }
 }
