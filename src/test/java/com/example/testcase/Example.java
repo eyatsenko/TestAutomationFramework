@@ -3,20 +3,16 @@ package com.example.testcase;
 import com.example.base.BaseWeb;
 import com.example.driver.DriverManager;
 import com.example.page.MainPage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import com.example.page.login.LoginPage;
 
 import java.time.Duration;
 
 public class Example extends BaseWeb {
-    private static final Logger logger = LoggerFactory.getLogger(Example.class);
 
     @Test(dataProvider = "testData", dataProviderClass = DataProvider1.class, description = "Check login")
-    public static void LoginTest(String username, String password) {
+    public void LoginTest(String username, String password) {
         var mainPage = new MainPage();
         logger.info("Click on Sign in Link");
         mainPage.clickSignInLink();
@@ -48,7 +44,7 @@ public class Example extends BaseWeb {
         logger.info("Click on Logout button");
         loginPage.clickLogoutButton();
         DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        Assert.assertEquals(DriverManager.getDriver().getTitle(), "Zoho | Cloud Software Suite for Businesses");
+        Assert.assertEquals(DriverManager.getDriver().getTitle(), "Explore All Products | Zoho");
 /*
         Using Fluent Interface Pattern:
         loginPage

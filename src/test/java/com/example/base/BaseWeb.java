@@ -4,11 +4,15 @@ import com.example.driver.DriverManager;
 import com.example.driver.TargetFactory;
 import com.example.report.AllureManager;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 
 import static com.example.config.ConfigurationManager.configuration;
 
 public abstract class BaseWeb {
+
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @BeforeSuite
     public void beforeSuite() {

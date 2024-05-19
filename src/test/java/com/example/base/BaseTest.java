@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class BaseTest {
-    public static WebDriver driver;
-    public static Properties prop = new Properties();
-    private static final Logger logger = LoggerFactory.getLogger(BaseTest.class);
+    protected static WebDriver driver;
+    protected static Properties prop = new Properties();
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @BeforeTest
     public void setUp() {
