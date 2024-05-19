@@ -20,7 +20,6 @@ public class AllureManager {
                 "Target execution", configuration().target(),
                 "Global timeout", String.valueOf(configuration().timeout()),
                 "Headless mode", String.valueOf(configuration().headless()),
-                "Faker locale", configuration().faker(),
                 "Local browser", configuration().browser()
         ));
 

@@ -48,7 +48,7 @@ public class Example extends BaseWeb {
         logger.info("Click on Logout button");
         loginPage.clickLogoutButton();
         DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        Assert.assertEquals(DriverManager.getDriver().getTitle(), "Zoho | Cloud Software Suite for Businesses");
+        Assert.assertEquals(DriverManager.getDriver().getTitle(), "Explore All Products | Zoho");
 /*
         Using Fluent Interface Pattern:
         loginPage
