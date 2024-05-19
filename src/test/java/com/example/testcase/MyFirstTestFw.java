@@ -5,18 +5,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 public class MyFirstTestFw extends BaseTest {
-    private static final Logger logger = LoggerFactory.getLogger(MyFirstTestFw.class);
 
     @Test (dataProvider = "testData", dataProviderClass = DataProvider1.class)
-    public static void LoginTest(String username, String password) {
+    public void LoginTest(String username, String password) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         logger.info("Click on Sign in Button");
         WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Sign in")));
