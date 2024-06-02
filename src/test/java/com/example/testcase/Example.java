@@ -3,12 +3,11 @@ package com.example.testcase;
 import com.example.base.BaseWeb;
 import com.example.driver.DriverManager;
 import com.example.page.MainPage;
+import com.example.utilities.WaitUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.example.page.login.LoginPage;
-
-import java.time.Duration;
 
 public class Example extends BaseWeb {
     private MainPage mainPage;
@@ -26,31 +25,31 @@ public class Example extends BaseWeb {
         mainPage.clickSignInLink();
 
         Assert.assertEquals(DriverManager.getDriver().getTitle(), "Zoho Accounts");
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        WaitUtils.waitForSeconds(5);
         logger.info("Enter email");
         loginPage.fillEmail(username);
 
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        WaitUtils.waitForSeconds(5);
         logger.info("Click on next button");
         loginPage.clickNextButton();
 
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        WaitUtils.waitForSeconds(5);
         logger.info("Enter password");
         loginPage.fillPassword(password);
 
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        WaitUtils.waitForSeconds(5);
         logger.info("Click on Sign in button");
         loginPage.clickSignInButton();
         Assert.assertEquals(DriverManager.getDriver().getTitle(), "Zoho Accounts");
 
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        WaitUtils.waitForSeconds(10);
         logger.info("Click on Profile button");
         loginPage.clickProfileButton();
 
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        WaitUtils.waitForSeconds(5);
         logger.info("Click on Logout button");
         loginPage.clickLogoutButton();
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        WaitUtils.waitForSeconds(10);
         Assert.assertEquals(DriverManager.getDriver().getTitle(), "Explore All Products | Zoho");
 /*
         Using Fluent Interface Pattern:

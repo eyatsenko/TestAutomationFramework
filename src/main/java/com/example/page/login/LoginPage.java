@@ -1,13 +1,10 @@
 package com.example.page.login;
 
-import com.example.driver.DriverManager;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import com.example.page.AbstractPageObject;
-
-import java.time.Duration;
 
 @Getter
 public class LoginPage extends AbstractPageObject {
@@ -62,12 +59,6 @@ public class LoginPage extends AbstractPageObject {
     @Step
     public LoginPage clickLogoutButton() {
         logoutButton.click();
-        return this;
-    }
-
-    @Step
-    public LoginPage wait(int seconds) {
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
         return this;
     }
 }
