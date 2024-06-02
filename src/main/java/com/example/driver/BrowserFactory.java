@@ -1,5 +1,6 @@
 package com.example.driver;
 
+import com.example.data.changeless.BrowserData;
 import com.example.exceptions.HeadlessNotSupportedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,7 +16,6 @@ import org.openqa.selenium.safari.SafariOptions;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 
 import static com.example.config.ConfigurationManager.configuration;
-import static com.example.data.changeless.BrowserData.*;
 import static java.lang.Boolean.TRUE;
 
 public enum BrowserFactory {
@@ -37,12 +37,11 @@ public enum BrowserFactory {
         @Override
         public ChromeOptions getOptions() {
             var chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments(START_MAXIMIZED);
-            chromeOptions.addArguments(DISABLE_INFOBARS);
-            chromeOptions.addArguments(DISABLE_NOTIFICATIONS);
-            chromeOptions.addArguments(REMOTE_ALLOW_ORIGINS);
+            chromeOptions.addArguments(BrowserData.getDefaultOptions());
 
-            if (configuration().headless()) chromeOptions.addArguments(CHROME_HEADLESS);
+            if (configuration().headless()) {
+                chromeOptions.addArguments(BrowserData.getChromeHeadlessOption());
+            }
 
             return chromeOptions;
         }
@@ -63,9 +62,11 @@ public enum BrowserFactory {
         @Override
         public FirefoxOptions getOptions() {
             var firefoxOptions = new FirefoxOptions();
-            firefoxOptions.addArguments(START_MAXIMIZED);
+            firefoxOptions.addArguments(BrowserData.getDefaultOptions());
 
-            if (configuration().headless()) firefoxOptions.addArguments(GENERIC_HEADLESS);
+            if (configuration().headless()) {
+                firefoxOptions.addArguments(BrowserData.getGenericHeadlessOption());
+            }
 
             return firefoxOptions;
         }
@@ -85,9 +86,11 @@ public enum BrowserFactory {
         @Override
         public EdgeOptions getOptions() {
             var edgeOptions = new EdgeOptions();
-            edgeOptions.addArguments(START_MAXIMIZED);
+            edgeOptions.addArguments(BrowserData.getDefaultOptions());
 
-            if (configuration().headless()) edgeOptions.addArguments(GENERIC_HEADLESS);
+            if (configuration().headless()) {
+                edgeOptions.addArguments(BrowserData.getGenericHeadlessOption());
+            }
 
             return edgeOptions;
         }
