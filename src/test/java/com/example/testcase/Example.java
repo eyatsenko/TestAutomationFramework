@@ -4,20 +4,27 @@ import com.example.base.BaseWeb;
 import com.example.driver.DriverManager;
 import com.example.page.MainPage;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.example.page.login.LoginPage;
 
 import java.time.Duration;
 
 public class Example extends BaseWeb {
+    private MainPage mainPage;
+    private LoginPage loginPage;
+
+    @BeforeMethod
+    public void setUp() {
+        mainPage = new MainPage();
+        loginPage = new LoginPage();
+    }
 
     @Test(dataProvider = "testData", dataProviderClass = DataProvider1.class, description = "Check login")
     public void LoginTest(String username, String password) {
-        var mainPage = new MainPage();
         logger.info("Click on Sign in Link");
         mainPage.clickSignInLink();
 
-        var loginPage = new LoginPage();
         Assert.assertEquals(DriverManager.getDriver().getTitle(), "Zoho Accounts");
         DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         logger.info("Enter email");
