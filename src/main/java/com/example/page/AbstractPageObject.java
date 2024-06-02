@@ -1,6 +1,7 @@
 package com.example.page;
 
 import com.example.driver.DriverManager;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import static com.example.config.ConfigurationManager.configuration;
@@ -10,5 +11,9 @@ public class AbstractPageObject {
 
     protected AbstractPageObject() {
         initElements(new AjaxElementLocatorFactory(DriverManager.getDriver(), configuration().timeout()), this);
+    }
+
+    public String getPageTitle() {
+        return DriverManager.getDriver().getTitle();
     }
 }
