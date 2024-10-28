@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 @Getter
 public class MainPage extends AbstractPageObject {
-    @FindBy(linkText = "Sign in")
+    @FindBy(linkText = "Sign In")
     private WebElement signInLink;
 
     @Step

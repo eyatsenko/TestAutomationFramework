@@ -1,6 +1,7 @@
 package com.example.testcase;
 
 import com.example.base.BaseWeb;
+import com.example.page.HomePage;
 import com.example.page.MainPage;
 import com.example.utilities.WaitUtils;
 import org.testng.Assert;
@@ -11,6 +12,7 @@ import com.example.page.login.LoginPage;
 public class Example extends BaseWeb {
     private MainPage mainPage;
     private LoginPage loginPage;
+    private HomePage homePage;
     private final String loginPageTitle = "Zoho Accounts";
     private final String mainPageTitle = "Explore All Products | Zoho";
 
@@ -18,6 +20,7 @@ public class Example extends BaseWeb {
     public void setUp() {
         mainPage = new MainPage();
         loginPage = new LoginPage();
+        homePage = new HomePage();
     }
 
     @Test(dataProvider = "testData", dataProviderClass = DataProvider1.class, description = "Check login")
@@ -45,11 +48,11 @@ public class Example extends BaseWeb {
 
         WaitUtils.waitForSeconds(10);
         logger.info("Click on Profile button");
-        loginPage.clickProfileButton();
+        homePage.clickProfileButton();
 
         WaitUtils.waitForSeconds(5);
         logger.info("Click on Logout button");
-        loginPage.clickLogoutButton();
+        homePage.clickLogoutButton();
         WaitUtils.waitForSeconds(10);
         Assert.assertEquals(mainPage.getPageTitle(), mainPageTitle);
 /*
