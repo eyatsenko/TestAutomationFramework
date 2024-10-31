@@ -11,7 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-public class ReadXlsData {
+public class ExcelDataUtils {
     @DataProvider(name = "testData")
     public String[][] getData(Method m) throws IOException {
         File f = new File(System.getProperty("user.dir") + "\\src\\test\\resources\\testdata\\testdata.xlsx");

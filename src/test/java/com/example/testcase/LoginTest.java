@@ -3,6 +3,7 @@ package com.example.testcase;
 import com.example.base.BaseWeb;
 import com.example.page.HomePage;
 import com.example.page.MainPage;
+import com.example.utilities.LoginTestDataUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,7 +23,7 @@ public class LoginTest extends BaseWeb {
         homePage = new HomePage();
     }
 
-    @Test(dataProvider = "testData", dataProviderClass = LoginTestData.class, description = "Check login")
+    @Test(dataProvider = "testDataJson", dataProviderClass = LoginTestDataUtils.class, description = "Check login")
     public void LoginTest(String username, String password) {
         logger.info("Click on Sign in Link");
         mainPage.clickSignInLink();
@@ -46,7 +47,7 @@ public class LoginTest extends BaseWeb {
 
         homePage.clickLogoutButton();
         Assert.assertEquals(mainPage.getPageTitle(), mainPageTitle);
-/*
+        /*
         Using Fluent Interface Pattern:
         loginPage
                 .clickSignInButton()
