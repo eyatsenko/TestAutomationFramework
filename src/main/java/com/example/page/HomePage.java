@@ -5,10 +5,12 @@ import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static com.example.driver.DriverManager.waitUtils;
+
 @Getter
-public class HomePage extends AbstractPageObject{
-    @FindBy(xpath =
-            "//*[@id=\"ztb-container\"]/div[1]")
+public class HomePage extends AbstractPageObject {
+
+    @FindBy(xpath = "//*[@id=\"ztb-container\"]//*[@class=\"ztb-profile-container ztb-profile-image-pre\"]")
     private WebElement profileButton;
 
     @FindBy(xpath = "//*[@id=\"ztb-signout\"]")
@@ -16,12 +18,14 @@ public class HomePage extends AbstractPageObject{
 
     @Step
     public HomePage clickProfileButton() {
+        waitUtils.waitForElementToBeClickable(profileButton);
         profileButton.click();
         return this;
     }
 
     @Step
     public HomePage clickLogoutButton() {
+        waitUtils.waitForElementToBeClickable(logoutButton);
         logoutButton.click();
         return this;
     }

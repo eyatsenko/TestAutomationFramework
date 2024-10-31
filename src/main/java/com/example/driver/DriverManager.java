@@ -1,11 +1,13 @@
 package com.example.driver;
 
+import com.example.utilities.WaitUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class DriverManager {
 
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    public static WaitUtils waitUtils = new WaitUtils(DriverManager.getDriver());
 
     private DriverManager() {}
 

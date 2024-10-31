@@ -28,7 +28,8 @@ public enum BrowserFactory {
 
         @Override
         public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>().withCapabilities(new ChromeOptions());
+            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
+                                                                                .withCapabilities(new ChromeOptions());
             driverContainer.start();
 
             return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new ChromeOptions());
@@ -53,7 +54,8 @@ public enum BrowserFactory {
 
         @Override
         public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>().withCapabilities(new FirefoxOptions());
+            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
+                                                                                .withCapabilities(new FirefoxOptions());
             driverContainer.start();
 
             return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new FirefoxOptions());
@@ -77,7 +79,8 @@ public enum BrowserFactory {
         }
 
         public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>().withCapabilities(new EdgeOptions());
+            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
+                                                                                   .withCapabilities(new EdgeOptions());
             driverContainer.start();
 
             return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new EdgeOptions());
