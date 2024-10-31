@@ -3,18 +3,17 @@ package com.example.testcase;
 import com.example.base.BaseWeb;
 import com.example.page.HomePage;
 import com.example.page.MainPage;
-import com.example.utilities.WaitUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.example.page.login.LoginPage;
 
-public class Example extends BaseWeb {
+public class LoginTest extends BaseWeb {
     private MainPage mainPage;
     private LoginPage loginPage;
     private HomePage homePage;
     private final String loginPageTitle = "Zoho Accounts";
-    private final String mainPageTitle = "Explore All Products | Zoho";
+    private final String mainPageTitle = "Zoho | Cloud Software Suite for Businesses";
 
     @BeforeMethod
     public void setUp() {
@@ -23,37 +22,29 @@ public class Example extends BaseWeb {
         homePage = new HomePage();
     }
 
-    @Test(dataProvider = "testData", dataProviderClass = DataProvider1.class, description = "Check login")
+    @Test(dataProvider = "testData", dataProviderClass = LoginTestData.class, description = "Check login")
     public void LoginTest(String username, String password) {
         logger.info("Click on Sign in Link");
         mainPage.clickSignInLink();
 
         Assert.assertEquals(loginPage.getPageTitle(), loginPageTitle);
-        WaitUtils.waitForSeconds(5);
         logger.info("Enter email");
         loginPage.fillEmail(username);
 
-        WaitUtils.waitForSeconds(5);
         logger.info("Click on next button");
         loginPage.clickNextButton();
 
-        WaitUtils.waitForSeconds(5);
         logger.info("Enter password");
         loginPage.fillPassword(password);
 
-        WaitUtils.waitForSeconds(5);
         logger.info("Click on Sign in button");
         loginPage.clickSignInButton();
         Assert.assertEquals(loginPage.getPageTitle(), loginPageTitle);
 
-        WaitUtils.waitForSeconds(10);
         logger.info("Click on Profile button");
         homePage.clickProfileButton();
 
-        WaitUtils.waitForSeconds(5);
-        logger.info("Click on Logout button");
         homePage.clickLogoutButton();
-        WaitUtils.waitForSeconds(10);
         Assert.assertEquals(mainPage.getPageTitle(), mainPageTitle);
 /*
         Using Fluent Interface Pattern:

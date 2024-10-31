@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeTest;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 
 public class BaseTest {
@@ -31,24 +32,28 @@ public class BaseTest {
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
+                    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
                     maximizeAndOpenUrl();
                     break;
                 }
                 case "safari": {
                     WebDriverManager.safaridriver().setup();
                     driver = new SafariDriver();
+                    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
                     maximizeAndOpenUrl();
                     break;
                 }
                 case "edge": {
                     WebDriverManager.edgedriver().setup();
                     driver = new EdgeDriver();
+                    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
                     maximizeAndOpenUrl();
                     break;
                 }
                 default: {
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
+                    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
                     maximizeAndOpenUrl();
                     break;
                 }

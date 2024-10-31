@@ -5,6 +5,8 @@ import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static com.example.driver.DriverManager.waitUtils;
+
 @Getter
 public class MainPage extends AbstractPageObject {
     @FindBy(linkText = "Sign In")
@@ -12,6 +14,7 @@ public class MainPage extends AbstractPageObject {
 
     @Step
     public MainPage clickSignInLink() {
+        waitUtils.waitForElementToBeClickable(signInLink);
         signInLink.click();
         return this;
     }
