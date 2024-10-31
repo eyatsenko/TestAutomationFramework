@@ -1,13 +1,13 @@
-package com.example.testcase;
+package com.example.testcase.zoho;
 
 import com.example.base.BaseWeb;
-import com.example.page.HomePage;
-import com.example.page.MainPage;
+import com.example.page.zoho.HomePage;
+import com.example.page.zoho.MainPage;
 import com.example.utilities.LoginTestDataUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import com.example.page.login.LoginPage;
+import com.example.page.zoho.login.LoginPage;
 
 public class LoginTest extends BaseWeb {
     private MainPage mainPage;

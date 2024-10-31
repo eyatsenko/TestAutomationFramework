@@ -1,7 +1,6 @@
 package com.example.page;
 
 import com.example.driver.DriverManager;
-import io.qameta.allure.Step;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import static com.example.config.ConfigurationManager.configuration;

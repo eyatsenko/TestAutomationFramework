@@ -1,4 +1,4 @@
-package com.example.page.login;
+package com.example.page.zoho.login;
 
 import io.qameta.allure.Step;
 import lombok.Getter;

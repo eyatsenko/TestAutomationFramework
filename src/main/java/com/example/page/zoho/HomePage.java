@@ -1,5 +1,6 @@
-package com.example.page;
+package com.example.page.zoho;
 
+import com.example.page.AbstractPageObject;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
