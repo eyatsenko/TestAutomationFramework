@@ -24,6 +24,7 @@ public class LoginPageTests extends BaseWeb {
     private RegistrationPage registrationPage;
     private Faker faker;
     private User user;
+    private JavascriptExecutor js;
 
     @BeforeMethod
     public void setUp() {
@@ -35,6 +36,7 @@ public class LoginPageTests extends BaseWeb {
         bsaSidebarMenu = new BookStoreApplicationSidebarMenu();
         faker = new Faker();
         user = new User();
+        js = (JavascriptExecutor) DriverManager.getDriver();
         user.setFirstName(faker.name().firstName())
                 .setLastName(faker.name().lastName())
                 .setUsername((user.getFirstName() + user.getLastName()).toLowerCase())
@@ -43,7 +45,6 @@ public class LoginPageTests extends BaseWeb {
 
     @Test(description = "Check login")
     public void LoginTest() {
-        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
 
         logger.info("Click on Book Store Application Card");
@@ -65,7 +66,6 @@ public class LoginPageTests extends BaseWeb {
 
     @Test(description = "Check user registration")
     public void RegisterTest() throws InterruptedException {
-        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
 
         logger.info("Click on Book Store Application Card");
