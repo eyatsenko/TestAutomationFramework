@@ -1,8 +1,11 @@
 package com.example.page.demoqa;
 
+import com.example.driver.DriverManager;
 import com.example.page.AbstractPageObject;
+import com.example.page.demoqa.components.CalendarComponent;
 import io.qameta.allure.Step;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -35,8 +38,8 @@ public class PracticeFormPage extends AbstractPageObject {
     @FindBy(id = "dateOfBirthInput")
     private WebElement dateOfBirth;
 
-    @FindBy(xpath = "//div[@id='subjectsContainer']")
-    private WebElement subjectsContainer;
+    @FindBy(xpath = "//input[@id='subjectsInput']")
+    private WebElement subjectsInput;
 
     @FindBy(xpath = "//label[@for='hobbies-checkbox-1']")
     private WebElement sportCheckBox;
@@ -53,10 +56,10 @@ public class PracticeFormPage extends AbstractPageObject {
     @FindBy(id = "currentAddress")
     private WebElement currentAddressField;
 
-    @FindBy(xpath = "//div[contains(text(),'Select State')]")
+    @FindBy(id = "state")
     private WebElement selectStateDropDownList;
 
-    @FindBy(xpath = "//div[contains(text(),'Select City')]")
+    @FindBy(id = "city")
     private WebElement selectCityDropDownList;
 
     @FindBy(id = "submit")
@@ -117,19 +120,17 @@ public class PracticeFormPage extends AbstractPageObject {
     }
 
     @Step
-    public PracticeFormPage setDateOfBirth(String dob) {
+    public CalendarComponent clickOnCalendar() {
         waitUtils.waitForElementToBeClickable(dateOfBirth);
-        dateOfBirth.sendKeys(dob);
-        return this;
+        dateOfBirth.click();
+        return new CalendarComponent();
     }
 
     @Step
     public PracticeFormPage fillSubjects(String[] subjects) {
         for (String subject : subjects) {
-            waitUtils.waitForElementToBeClickable(subjectsContainer);
-            subjectsContainer.click();
-            subjectsContainer.sendKeys(subject);
-            subjectsContainer.sendKeys(" ");
+            subjectsInput.sendKeys(subject);
+            subjectsInput.sendKeys(ENTER);
         }
         return this;
     }
@@ -174,6 +175,13 @@ public class PracticeFormPage extends AbstractPageObject {
     }
 
     @Step
+    public PracticeFormPage uploadPicture (String path) {
+        waitUtils.waitForElementToBeClickable(uploadPictureButton);
+        uploadPictureButton.sendKeys(path);
+        return this;
+    }
+
+    @Step
     public PracticeFormPage fillCurrentAddress(String address) {
         waitUtils.waitForElementToBeClickable(currentAddressField);
         currentAddressField.sendKeys(address);
@@ -184,8 +192,11 @@ public class PracticeFormPage extends AbstractPageObject {
     public PracticeFormPage selectState(String stateName) {
         waitUtils.waitForElementToBeClickable(selectStateDropDownList);
         selectStateDropDownList.click();
-        selectStateDropDownList.sendKeys(stateName);
-        selectStateDropDownList.sendKeys(ENTER);
+        DriverManager.getDriver().findElement(By.id("react-select-3-input")).sendKeys(stateName);
+        DriverManager.getDriver().findElement(By
+                .xpath("//div[@id='stateCity-wrapper']//*[text()=\""+ stateName + "\"])")).click();
+//        selectStateDropDownList.sendKeys(stateName);
+//        selectStateDropDownList.sendKeys(ENTER);
         return this;
     }
 
@@ -193,13 +204,16 @@ public class PracticeFormPage extends AbstractPageObject {
     public PracticeFormPage selectCity(String cityName) {
         waitUtils.waitForElementToBeClickable(selectCityDropDownList);
         selectCityDropDownList.click();
-        selectCityDropDownList.sendKeys(cityName);
-        selectCityDropDownList.sendKeys(ENTER);
+        DriverManager.getDriver().findElement(By.id("react-select-4-input")).sendKeys(cityName);
+        DriverManager.getDriver().findElement(By
+                .xpath("//div[@id='stateCity-wrapper']//*[text()=\""+ cityName + "\"])")).click();
+//        selectCityDropDownList.sendKeys(cityName);
+//        selectCityDropDownList.sendKeys(ENTER);
         return this;
     }
 
     @Step
-    public PracticeFormPage clickSubmitButton () {
+    public PracticeFormPage clickSubmitButton() {
         waitUtils.waitForElementToBeClickable(submitButton);
         submitButton.click();
         return this;

@@ -16,12 +16,11 @@ public class FormModalWindow extends AbstractPageObject {
     @FindBy(id = "closeLargeModal")
     private WebElement closeModalButton;
 
-//    @Step
-//    public FormModalWindow clickCloseModalButton() {
-//        waitUtils.waitForElementToBeClickable(closeModalButton);
-//        closeModalButton.click();
-//        return this;
-//    }
+    @Step
+    public boolean isModalTableDisplayed() {
+        waitUtils.waitForElementToBeClickable(modalTable);
+        return modalTable.isDisplayed();
+    }
 
     @Step
     public FormModalWindow clickCloseModalButton() {

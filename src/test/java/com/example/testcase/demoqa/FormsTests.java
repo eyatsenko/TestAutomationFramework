@@ -5,14 +5,17 @@ import com.example.driver.DriverManager;
 import com.example.models.User;
 import com.example.page.demoqa.MainPage;
 import com.example.page.demoqa.PracticeFormPage;
+import com.example.page.demoqa.components.CalendarComponent;
 import com.example.page.demoqa.components.FormModalWindow;
 import com.example.page.demoqa.components.FormsSidebarMenu;
-import com.github.javafaker.Faker;
+import com.example.utilities.RandomDataUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.example.page.demoqa.components.SidebarMenu;
+
+import java.text.ParseException;
 
 public class FormsTests extends BaseWeb {
     private MainPage mainPage;
@@ -20,9 +23,10 @@ public class FormsTests extends BaseWeb {
     private FormModalWindow formModalWindow;
     private SidebarMenu sidebarMenu;
     private FormsSidebarMenu formsSidebarMenu;
-    private Faker faker;
     private User user;
+    private CalendarComponent calendar;
     private JavascriptExecutor js;
+
 
     @BeforeMethod
     public void setUp() {
@@ -31,87 +35,61 @@ public class FormsTests extends BaseWeb {
         formModalWindow = new FormModalWindow();
         sidebarMenu = new SidebarMenu();
         formsSidebarMenu = new FormsSidebarMenu();
-        faker = new Faker();
-        user = new User();
+        user = RandomDataUtils.getRandomUser();
         js = (JavascriptExecutor) DriverManager.getDriver();
-        user.setFirstName(faker.name().firstName())
-                .setLastName(faker.name().lastName())
-                .setUsername((user.getFirstName() + user.getLastName()).toLowerCase())
-                .setPassword("Test!12345")
-                .setEmail((user.getFirstName()+"."+user.getLastName()).toLowerCase()+"@fakemail.xyz")
-                .setGender("Male")
-                .setMobileNumber(String.valueOf(faker.number().digits(10)))
-                .setDateOfBirth("08051995")
-                .setSubjects(new String[]{"Maths", "Arts"})
-                .setHobbies(new String[]{"Sports", "Reading", "Music"})
-                .setPicture("src/resources/img.png")
-                .setCurrentAddress(faker.address().fullAddress())
-                .setState("NCR")
-                .setCity("Noida");
     }
 
     @Test(description = "Check form filling")
-    public void FillFormTest() throws InterruptedException {
+    public void FillFormTest() throws ParseException {
         logger.info("Click on Forms Card");
         mainPage.clickFormsCard();
 
-        Thread.sleep(1000);
         logger.info("Click on Login menu item in Sidebar");
         formsSidebarMenu.clickPracticeFormMenuItem();
 
-        Thread.sleep(1000);
         logger.info("Fill firstname");
         formPage.fillFirstName(user.getFirstName());
 
-        Thread.sleep(1000);
         logger.info("Fill lastname");
         formPage.fillLastName(user.getLastName());
 
-        Thread.sleep(1000);
         logger.info("Fill email");
         formPage.fillEmailField(user.getEmail());
 
-        Thread.sleep(1000);
         logger.info("Select Gender");
         formPage.selectGender(user.getGender());
 
-        Thread.sleep(1000);
         logger.info("Fill Mobile Number");
-        formPage.fillNumberField(user.getMobileNumber().toString());
+        formPage.fillNumberField(user.getMobileNumber());
 
-//        logger.info("Fill Date of birth");
-//        formPage.setDateOfBirth(user.getDateOfBirth());
+        logger.info("Click on Calendar");
+        calendar = formPage.clickOnCalendar();
 
-//        Thread.sleep(2000);
-//        logger.info("Fill Subjects");
-//        formPage.fillSubjects(user.getSubjects());
+        logger.info("Fill Date of birth");
+        calendar.setDate(12, "May", 2015);
 
-        Thread.sleep(1000);
+        logger.info("Fill Subjects");
+        formPage.fillSubjects(user.getSubjects());
+
         logger.info("Select Hobbies");
         formPage.selectHobbies(user.getHobbies());
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
 
-        Thread.sleep(1000);
-        logger.info("Select Hobbies");
-        formPage.selectHobbies(user.getHobbies());
+        logger.info("Select Picture");
+        formPage.uploadPicture(user.getPicture());
 
-        Thread.sleep(1000);
         logger.info("Fill Current Address");
         formPage.fillCurrentAddress(user.getCurrentAddress());
 
-//        Thread.sleep(2000);
-//        logger.info("Select State");
-//        formPage.selectState(user.getState());
-//
-//        Thread.sleep(2000);
-//        logger.info("Select City");
-//        formPage.selectCity(user.getCity());
+        logger.info("Select State");
+        formPage.selectState(user.getState());
 
-        Thread.sleep(1000);
+        logger.info("Select City");
+        formPage.selectCity(user.getCity());
+
         logger.info("Click Submit button");
         formPage.clickSubmitButton();
 
-        Thread.sleep(2000);
-        Assert.assertTrue(formModalWindow.getModalTable().isDisplayed());
+        Assert.assertTrue(formModalWindow.isModalTableDisplayed());
     }
 }
