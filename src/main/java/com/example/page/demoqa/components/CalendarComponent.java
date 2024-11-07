@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.text.ParseException;
 
+import static com.example.driver.DriverManager.waitUtils;
+
 
 @Getter
 public class CalendarComponent extends AbstractPageObject {
@@ -24,12 +26,19 @@ public class CalendarComponent extends AbstractPageObject {
 
     @Step
     public void setDate(int day, String month, int year) throws ParseException {
-        Select monthSelect = new Select(monthDatePicker);
         Select yearSelect = new Select(yearDatePicker);
+        Select monthSelect = new Select(monthDatePicker);
 
+        waitUtils.waitForElementToBeClickable(yearDatePicker);
         yearSelect.selectByValue(String.valueOf(year));
+
+        waitUtils.waitForElementToBeClickable(monthDatePicker);
         monthSelect.selectByVisibleText(TimeFormatUtils
                 .getFullFormatMonth(String.valueOf(day), String.valueOf(month), String.valueOf(year)));
+
+        waitUtils.waitForElementToBeClickable(DriverManager.getDriver().findElement(
+                By.xpath("//*[contains(@class, 'react-datepicker__day--0" + day + "') " +
+                "and not(contains(@class, " + "'react-datepicker__day--outside-month'))]")));
 
         DriverManager.getDriver().findElement(
                 By.xpath("//*[contains(@class, 'react-datepicker__day--0" + day + "') " +

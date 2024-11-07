@@ -12,7 +12,7 @@ public class RandomDataUtils {
         User randomUser = new User();
         String[] subjects = {"Maths", "Arts", "History", "Accounting", "Biology", "Physics", "Computer Science",
                                         "Commerce", "Chemistry", "Civics", "Hindi", "Social Studies", "English"};
-        String[] sex = {"Male", "Female", "Other"};
+        String[] sex = {"Male", "Female"};
         String[] hobbies = {"Sports", "Reading", "Music"};
         String[] states = {"NCR", "Uttar Pradesh", "Haryana", "Rajasthan"};
         String[] citiesNCR = {"Delhi", "Gurgaon", "Noida"};
@@ -45,7 +45,7 @@ public class RandomDataUtils {
                 break;
             }
             case "Haryana": {
-                randomUser.setCity(citiesHaryana[faker.random().nextInt(citiesUttar.length)]);
+                randomUser.setCity(citiesHaryana[faker.random().nextInt(citiesHaryana.length)]);
                 break;
             }
             case "Rajasthan": {

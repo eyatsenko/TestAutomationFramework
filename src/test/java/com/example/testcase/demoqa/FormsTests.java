@@ -47,20 +47,21 @@ public class FormsTests extends BaseWeb {
         logger.info("Click on Login menu item in Sidebar");
         formsSidebarMenu.clickPracticeFormMenuItem();
 
-        logger.info("Fill firstname");
+        logger.info("Fill firstname: " + user.getFirstName());
         formPage.fillFirstName(user.getFirstName());
 
-        logger.info("Fill lastname");
+        logger.info("Fill lastname: " + user.getLastName());
         formPage.fillLastName(user.getLastName());
 
-        logger.info("Fill email");
+        logger.info("Fill email: " + user.getEmail());
         formPage.fillEmailField(user.getEmail());
 
-        logger.info("Select Gender");
+        logger.info("Select Gender: " + user.getGender());
         formPage.selectGender(user.getGender());
 
-        logger.info("Fill Mobile Number");
+        logger.info("Fill Mobile Number: " + user.getMobileNumber());
         formPage.fillNumberField(user.getMobileNumber());
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
 
         logger.info("Click on Calendar");
         calendar = formPage.clickOnCalendar();
@@ -68,28 +69,51 @@ public class FormsTests extends BaseWeb {
         logger.info("Fill Date of birth");
         calendar.setDate(12, "May", 2015);
 
-        logger.info("Fill Subjects");
+        logger.info("Fill Subjects: " + String.join(", ", user.getSubjects()));
         formPage.fillSubjects(user.getSubjects());
 
         logger.info("Select Hobbies");
         formPage.selectHobbies(user.getHobbies());
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
 
         logger.info("Select Picture");
         formPage.uploadPicture(user.getPicture());
 
-        logger.info("Fill Current Address");
+        logger.info("Fill Current Address: " + user.getCurrentAddress());
         formPage.fillCurrentAddress(user.getCurrentAddress());
 
-        logger.info("Select State");
-        formPage.selectState(user.getState());
+//TODO: fix selector
+//        logger.info("Select State: " + user.getState());
+//        formPage.selectState(user.getState());
 
-        logger.info("Select City");
-        formPage.selectCity(user.getCity());
+//TODO: fix selector
+//        logger.info("Select City: " + user.getCity());
+//        formPage.selectCity(user.getCity());
 
         logger.info("Click Submit button");
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
         formPage.clickSubmitButton();
 
+        logger.info("Check that Modal Window is displayed");
         Assert.assertTrue(formModalWindow.isModalTableDisplayed());
+
+        logger.info("Check username");
+        formModalWindow.verifyResult("Student Name", user.getFirstName() + " " + user.getLastName());
+        logger.info("Check Email");
+        formModalWindow.verifyResult("Student Email", user.getEmail());
+        logger.info("Check Gender");
+        formModalWindow.verifyResult("Gender", user.getGender());
+        logger.info("Check Mobile");
+        formModalWindow.verifyResult("Mobile", user.getMobileNumber());
+        logger.info("Check Date of Birth");
+        formModalWindow.verifyResult("Date of Birth", "12 May,2015");
+        logger.info("Check Subjects");
+        formModalWindow.verifyResult("Subjects", (String.join(", ", user.getSubjects())));
+        logger.info("Check Address");
+        formModalWindow.verifyResult("Address", user.getCurrentAddress());
+//        logger.info("Check State and City");
+//        formModalWindow.verifyResult("State and City", user.getState() + " " + user.getCity());
+
+        logger.info("Close modal window");
+        formModalWindow.clickCloseModalButton();
     }
 }

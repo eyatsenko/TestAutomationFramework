@@ -99,11 +99,6 @@ public class PracticeFormPage extends AbstractPageObject {
                 femaleRadioButton.click();
                 return this;
             }
-            case "Other": {
-                waitUtils.waitForElementToBeClickable(otherRadioButton);
-                otherRadioButton.click();
-                return this;
-            }
             default: {
                 waitUtils.waitForElementToBeClickable(otherRadioButton);
                 otherRadioButton.click();
@@ -192,11 +187,8 @@ public class PracticeFormPage extends AbstractPageObject {
     public PracticeFormPage selectState(String stateName) {
         waitUtils.waitForElementToBeClickable(selectStateDropDownList);
         selectStateDropDownList.click();
-        DriverManager.getDriver().findElement(By.id("react-select-3-input")).sendKeys(stateName);
-        DriverManager.getDriver().findElement(By
-                .xpath("//div[@id='stateCity-wrapper']//*[text()=\""+ stateName + "\"])")).click();
-//        selectStateDropDownList.sendKeys(stateName);
-//        selectStateDropDownList.sendKeys(ENTER);
+        selectStateDropDownList.sendKeys(stateName);
+        selectStateDropDownList.sendKeys(ENTER);
         return this;
     }
 
@@ -204,11 +196,8 @@ public class PracticeFormPage extends AbstractPageObject {
     public PracticeFormPage selectCity(String cityName) {
         waitUtils.waitForElementToBeClickable(selectCityDropDownList);
         selectCityDropDownList.click();
-        DriverManager.getDriver().findElement(By.id("react-select-4-input")).sendKeys(cityName);
-        DriverManager.getDriver().findElement(By
-                .xpath("//div[@id='stateCity-wrapper']//*[text()=\""+ cityName + "\"])")).click();
-//        selectCityDropDownList.sendKeys(cityName);
-//        selectCityDropDownList.sendKeys(ENTER);
+        selectCityDropDownList.sendKeys(cityName);
+        selectCityDropDownList.sendKeys(ENTER);
         return this;
     }
 
