@@ -31,6 +31,4 @@ public final class BrowserData {
     public static String getGenericHeadlessOption() {
         return GENERIC_HEADLESS;
     }
-
-
 }
