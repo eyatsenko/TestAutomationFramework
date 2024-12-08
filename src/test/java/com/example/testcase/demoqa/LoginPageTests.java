@@ -7,6 +7,7 @@ import com.example.page.demoqa.BookStoreApplicationPage;
 import com.example.page.demoqa.LoginPage;
 import com.example.page.demoqa.MainPage;
 import com.example.page.demoqa.RegistrationPage;
+import com.example.utilities.RandomDataUtils;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
@@ -35,12 +36,8 @@ public class LoginPageTests extends BaseWeb {
         sidebarMenu = new SidebarMenu();
         bsaSidebarMenu = new BookStoreApplicationSidebarMenu();
         faker = new Faker();
-        user = new User();
+        user = RandomDataUtils.getRandomUser();
         js = (JavascriptExecutor) DriverManager.getDriver();
-        user.setFirstName(faker.name().firstName())
-                .setLastName(faker.name().lastName())
-                .setUsername((user.getFirstName() + user.getLastName()).toLowerCase())
-                .setPassword("Test!12345");
     }
 
     @Test(description = "Check login")
@@ -77,16 +74,16 @@ public class LoginPageTests extends BaseWeb {
         logger.info("Click on NewUser button on the Login Page");
         loginPage.clickNewUserButton();
 
-        logger.info("Fill firstname on the Registration Page");
+        logger.info("Fill firstname " + "'" + user.getFirstName()+ "'" + " on the Registration Page");
         registrationPage.fillFirstName(user.getFirstName());
 
-        logger.info("Fill lastname on the Registration Page");
+        logger.info("Fill lastname " + "'" + user.getLastName()+ "'" + " on the Registration Page");
         registrationPage.fillLastName(user.getLastName());
 
-        logger.info("Fill lastname on the Registration Page");
+        logger.info("Fill username " + "'" + user.getUsername()+ "'" + " on the Registration Page");
         registrationPage.fillUserName(user.getUsername());
 
-        logger.info("Fill password on the Registration Page");
+        logger.info("Fill password " + "'" + user.getPassword()+ "'" + " on the Registration Page");
         registrationPage.fillPassword(user.getPassword());
 
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
