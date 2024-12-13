@@ -81,13 +81,11 @@ public class FormsTests extends BaseWeb {
         logger.info("Fill Current Address: " + user.getCurrentAddress());
         formPage.fillCurrentAddress(user.getCurrentAddress());
 
-//TODO: fix selector
-//        logger.info("Select State: " + user.getState());
-//        formPage.selectState(user.getState());
+        logger.info("Select State: " + user.getState());
+        formPage.selectState(user.getState());
 
-//TODO: fix selector
-//        logger.info("Select City: " + user.getCity());
-//        formPage.selectCity(user.getCity());
+        logger.info("Select City: " + user.getCity());
+        formPage.selectCity(user.getCity());
 
         logger.info("Click Submit button");
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
@@ -110,8 +108,8 @@ public class FormsTests extends BaseWeb {
         formModalWindow.verifyResult("Subjects", (String.join(", ", user.getSubjects())));
         logger.info("Check Address");
         formModalWindow.verifyResult("Address", user.getCurrentAddress());
-//        logger.info("Check State and City");
-//        formModalWindow.verifyResult("State and City", user.getState() + " " + user.getCity());
+        logger.info("Check State and City");
+        formModalWindow.verifyResult("State and City", user.getState() + " " + user.getCity());
 
         logger.info("Close modal window");
         formModalWindow.clickCloseModalButton();
