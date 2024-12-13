@@ -1,9 +1,10 @@
-<suite name="Main Suite">
-    <test thread-count="5" name="TestAutomationFramework">
+<suite name="Login Suite">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+    </listeners>
+    <test name="TestAutomationFramework">
         <classes>
-            <class name="testcase.MyFirstTestFw"/>
+            <class name="com.example.testcase.demoqa.LoginPageTests"/>
         </classes>
     </test>
-<!--  TestAutomationFramework  -->
 </suite>
-<!--  Main Suite  -->

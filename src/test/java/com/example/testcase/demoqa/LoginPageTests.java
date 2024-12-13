@@ -9,6 +9,8 @@ import com.example.page.demoqa.MainPage;
 import com.example.page.demoqa.RegistrationPage;
 import com.example.utilities.RandomDataUtils;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Step;
+import jdk.jfr.Description;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -40,6 +42,8 @@ public class LoginPageTests extends BaseWeb {
         js = (JavascriptExecutor) DriverManager.getDriver();
     }
 
+    @Description("This test validates the login functionality")
+    @Step
     @Test(description = "Check login")
     public void LoginTest() {
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
@@ -61,6 +65,8 @@ public class LoginPageTests extends BaseWeb {
         Assert.assertTrue(loginPage.getUserNameLabel().isDisplayed());
     }
 
+    @Description("This test validates the Register User functionality")
+    @Step
     @Test(description = "Check user registration")
     public void RegisterTest() throws InterruptedException {
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
