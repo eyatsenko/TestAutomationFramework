@@ -56,10 +56,10 @@ public class PracticeFormPage extends AbstractPageObject {
     @FindBy(id = "currentAddress")
     private WebElement currentAddressField;
 
-    @FindBy(id = "state")
+    @FindBy(xpath = "//*[@id='state']//input")
     private WebElement selectStateDropDownList;
 
-    @FindBy(id = "city")
+    @FindBy(xpath = "//*[@id='city']//input")
     private WebElement selectCityDropDownList;
 
     @FindBy(id = "submit")
@@ -186,7 +186,6 @@ public class PracticeFormPage extends AbstractPageObject {
     @Step
     public PracticeFormPage selectState(String stateName) {
         waitUtils.waitForElementToBeClickable(selectStateDropDownList);
-        selectStateDropDownList.click();
         selectStateDropDownList.sendKeys(stateName);
         selectStateDropDownList.sendKeys(ENTER);
         return this;
@@ -195,7 +194,6 @@ public class PracticeFormPage extends AbstractPageObject {
     @Step
     public PracticeFormPage selectCity(String cityName) {
         waitUtils.waitForElementToBeClickable(selectCityDropDownList);
-        selectCityDropDownList.click();
         selectCityDropDownList.sendKeys(cityName);
         selectCityDropDownList.sendKeys(ENTER);
         return this;
