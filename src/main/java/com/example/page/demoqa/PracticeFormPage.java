@@ -65,6 +65,10 @@ public class PracticeFormPage extends AbstractPageObject {
     @FindBy(id = "submit")
     private WebElement submitButton;
 
+    boolean isSportSelected = false;
+    boolean isReadingSelected = false;
+    boolean isMusicSelected = false;
+
     @Step
     public PracticeFormPage fillFirstName(String firstname) {
         waitUtils.waitForElementToBeClickable(firstNameField);
@@ -132,9 +136,6 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step
     public PracticeFormPage selectHobbies(String[] hobbies) {
-        boolean isSportSelected = false;
-        boolean isReadingSelected = false;
-        boolean isMusicSelected = false;
         for (String hobby : hobbies) {
             switch (hobby) {
                 case "Sports": {

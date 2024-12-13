@@ -20,7 +20,6 @@ public class RandomDataUtils {
         String[] citiesHaryana = {"Karnal", "Panipat"};
         String[] citiesRajasthan = {"Jaipur", "Jaiselmer"};
 
-
         randomUser.setFirstName(faker.name().firstName())
                 .setLastName(faker.name().lastName())
                 .setUsername((randomUser.getFirstName() + randomUser.getLastName()).toLowerCase())
@@ -28,7 +27,7 @@ public class RandomDataUtils {
                 .setEmail((randomUser.getFirstName() + "." + randomUser.getLastName()).toLowerCase() + "@fakemail.xyz")
                 .setGender(sex[faker.random().nextInt(sex.length)])
                 .setMobileNumber(faker.numerify("##########"))
-                .setDateOfBirth("08051995")
+                .setDateOfBirth("12052015")
                 .setSubjects(new String[]{subjects[faker.random().nextInt(subjects.length)]})
                 .setHobbies(new String[]{hobbies[faker.random().nextInt(hobbies.length)]})
                 .setPicture(Paths.get("src", "test", "resources", "img.png").toAbsolutePath().toString())

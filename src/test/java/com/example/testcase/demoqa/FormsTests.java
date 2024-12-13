@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import com.example.page.demoqa.components.SidebarMenu;
 
 import java.text.ParseException;
+import java.util.Arrays;
 
 public class FormsTests extends BaseWeb {
     private MainPage mainPage;
@@ -26,7 +27,6 @@ public class FormsTests extends BaseWeb {
     private User user;
     private CalendarComponent calendar;
     private JavascriptExecutor js;
-
 
     @BeforeMethod
     public void setUp() {
@@ -94,21 +94,21 @@ public class FormsTests extends BaseWeb {
         logger.info("Check that Modal Window is displayed");
         Assert.assertTrue(formModalWindow.isModalTableDisplayed());
 
-        logger.info("Check username");
+        logger.info("Check that username is: " + user.getFirstName() + " " + user.getLastName());
         formModalWindow.verifyResult("Student Name", user.getFirstName() + " " + user.getLastName());
-        logger.info("Check Email");
+        logger.info("Check that Email is: " + user.getEmail());
         formModalWindow.verifyResult("Student Email", user.getEmail());
-        logger.info("Check Gender");
+        logger.info("Check that Gender is: " + user.getGender());
         formModalWindow.verifyResult("Gender", user.getGender());
-        logger.info("Check Mobile");
+        logger.info("Check that Mobile is: " + user.getMobileNumber());
         formModalWindow.verifyResult("Mobile", user.getMobileNumber());
-        logger.info("Check Date of Birth");
+        logger.info("Check that Date of Birth is: " + user.getDateOfBirth());
         formModalWindow.verifyResult("Date of Birth", "12 May,2015");
-        logger.info("Check Subjects");
+        logger.info("Check that Subjects is: " + Arrays.toString(user.getSubjects()));
         formModalWindow.verifyResult("Subjects", (String.join(", ", user.getSubjects())));
-        logger.info("Check Address");
+        logger.info("Check that Address is: " + user.getCurrentAddress());
         formModalWindow.verifyResult("Address", user.getCurrentAddress());
-        logger.info("Check State and City");
+        logger.info("Check that State and City is: " + user.getState() + " " + user.getCity());
         formModalWindow.verifyResult("State and City", user.getState() + " " + user.getCity());
 
         logger.info("Close modal window");
