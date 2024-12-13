@@ -23,24 +23,6 @@ public class TargetFactory {
         return switch (target) {
             case LOCAL -> valueOf(configuration().browser().toUpperCase()).createLocalDriver();
             case LOCAL_SUITE -> valueOf(browser.toUpperCase()).createLocalDriver();
-            case SELENIUM_GRID -> createRemoteInstance(valueOf(browser.toUpperCase()).getOptions());
-            case TESTCONTAINERS -> valueOf(configuration().browser().toUpperCase()).createTestContainerDriver();
         };
-    }
-
-    private RemoteWebDriver createRemoteInstance(MutableCapabilities capability) {
-        RemoteWebDriver remoteWebDriver = null;
-        try {
-            String gridURL = format("http://%s:%s", configuration().gridUrl(), configuration().gridPort());
-
-            remoteWebDriver = new RemoteWebDriver(URI.create(gridURL).toURL(), capability);
-        } catch (java.net.MalformedURLException e) {
-            logger.error("Grid URL is invalid or Grid is not available");
-            logger.error(format("Browser: %s", capability.getBrowserName()), e);
-        } catch (IllegalArgumentException e) {
-            logger.error(format("Browser %s is not valid or recognized", capability.getBrowserName()), e);
-        }
-
-        return remoteWebDriver;
     }
 }

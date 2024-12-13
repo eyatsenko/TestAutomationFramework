@@ -71,6 +71,7 @@ public class LoginPageTests extends BaseWeb {
         Allure.step("Click on Login Button");
         logger.info("Click on Login Button");
         loginPage.clickLoginButton();
+        Assert.fail();
         Assert.assertTrue(loginPage.getUserNameLabel().isDisplayed());
     }
 

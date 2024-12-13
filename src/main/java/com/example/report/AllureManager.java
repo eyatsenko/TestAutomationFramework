@@ -23,11 +23,6 @@ public class AllureManager {
                 "Local browser", configuration().browser()
         ));
 
-        if (configuration().target().equals(Target.SELENIUM_GRID.name())) {
-            var gridMap = Map.of("Grid URL", configuration().gridUrl(), "Grid port", configuration().gridPort());
-            basicInfo.putAll(gridMap);
-        }
-
         AllureEnvironmentWriter.allureEnvironmentWriter(ImmutableMap.copyOf(basicInfo));
     }
 }
