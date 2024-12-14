@@ -1,76 +1,56 @@
 package com.example.base;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.example.driver.DriverManager;
+import com.example.driver.TargetFactory;
+import com.example.report.AllureManager;
+import com.example.utilities.ScreenshotUtil;
+import io.qameta.allure.Allure;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
-import java.util.Properties;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class BaseTest {
-    protected static WebDriver driver;
-    protected static Properties prop = new Properties();
+import static com.example.config.ConfigurationManager.configuration;
+
+public abstract class BaseTest {
+
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @BeforeTest
-    public void setUp() {
-        String propFileName = System.getProperty("user.dir") + "\\src\\test\\resources\\general.properties";
-        try (FileReader fileReaderProperties = new FileReader(propFileName)) {
-            if (driver == null) {
-                prop.load(fileReaderProperties);
-            }
-            switch (prop.getProperty("browser")) {
-                case "firefox": {
-                    WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
-                    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-                    maximizeAndOpenUrl();
-                    break;
-                }
-                case "safari": {
-                    WebDriverManager.safaridriver().setup();
-                    driver = new SafariDriver();
-                    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-                    maximizeAndOpenUrl();
-                    break;
-                }
-                case "edge": {
-                    WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver();
-                    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-                    maximizeAndOpenUrl();
-                    break;
-                }
-                default: {
-                    WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
-                    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-                    maximizeAndOpenUrl();
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            logger.error(e.getMessage());
+    @BeforeSuite
+    public void beforeSuite() {
+        AllureManager.setAllureEnvironmentInformation();
+    }
+
+    @BeforeMethod(alwaysRun = true)
+    @Parameters("browser")
+    public void preCondition(@Optional("chrome") String browser) {
+        Allure.step("WebDriver instantiating...");
+        WebDriver driver = new TargetFactory().createInstance(browser);
+        DriverManager.setDriver(driver);
+        DriverManager.getDriver().get(configuration().url());
+    }
+
+    protected void logAndStep(String stepDescription) {
+        Allure.step(stepDescription);
+        logger.info(stepDescription);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void postCondition(ITestResult result) throws IOException {
+
+        if (result.getStatus() == ITestResult.FAILURE) {
+            File screenshot = ScreenshotUtil.takeScreenshot(DriverManager.getDriver());
+            String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+            Allure.addAttachment("screenshot_" + timestamp, FileUtils.openInputStream(screenshot));
         }
-    }
-
-    public void maximizeAndOpenUrl() {
-        driver.manage().window().maximize();
-        driver.get(prop.getProperty("url.base"));
-    }
-
-    @AfterTest
-    public void tearDown() {
-        driver.quit();
-        logger.info("Driver has been closed!");
+        Allure.step("WebDriver quiting...");
+        DriverManager.quit();
     }
 }

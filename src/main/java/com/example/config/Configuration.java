@@ -7,8 +7,7 @@ import org.aeonbits.owner.Config.LoadType;
 @LoadPolicy(LoadType.MERGE)
 @Config.Sources({
         "system:properties",
-        "classpath:general.properties",
-        "classpath:selenium-grid.properties"})
+        "classpath:general.properties"})
 public interface Configuration extends Config {
 
     @Key("target")
@@ -25,10 +24,4 @@ public interface Configuration extends Config {
 
     @Key("timeout")
     int timeout();
-
-    @Key("grid.url")
-    String gridUrl();
-
-    @Key("grid.port")
-    String gridPort();
 }

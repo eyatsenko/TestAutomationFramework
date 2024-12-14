@@ -1,6 +1,6 @@
 package com.example.testcase.zoho;
 
-import com.example.base.BaseWeb;
+import com.example.base.BaseTest;
 import com.example.page.zoho.HomePage;
 import com.example.page.zoho.MainPage;
 import com.example.utilities.LoginTestDataUtils;
@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.example.page.zoho.login.LoginPage;
 
-public class LoginTest extends BaseWeb {
+public class LoginTest extends BaseTest {
     private MainPage mainPage;
     private LoginPage loginPage;
     private HomePage homePage;
@@ -25,44 +25,27 @@ public class LoginTest extends BaseWeb {
 
     @Test(dataProvider = "testDataJson", dataProviderClass = LoginTestDataUtils.class, description = "Check login")
     public void LoginTest(String username, String password) {
-        logger.info("Click on Sign in Link");
+        logAndStep("Click on Sign in Link");
         mainPage.clickSignInLink();
 
         Assert.assertEquals(loginPage.getPageTitle(), loginPageTitle);
-        logger.info("Enter email");
+        logAndStep("Enter email");
         loginPage.fillEmail(username);
 
-        logger.info("Click on next button");
+        logAndStep("Click on next button");
         loginPage.clickNextButton();
 
-        logger.info("Enter password");
+        logAndStep("Enter password");
         loginPage.fillPassword(password);
 
-        logger.info("Click on Sign in button");
+        logAndStep("Click on Sign in button");
         loginPage.clickSignInButton();
         Assert.assertEquals(loginPage.getPageTitle(), loginPageTitle);
 
-        logger.info("Click on Profile button");
+        logAndStep("Click on Profile button");
         homePage.clickProfileButton();
 
         homePage.clickLogoutButton();
         Assert.assertEquals(mainPage.getPageTitle(), mainPageTitle);
-        /*
-        Using Fluent Interface Pattern:
-        loginPage
-                .clickSignInButton()
-                .wait(5)
-                .fillEmail(username)
-                .wait(5)
-                .clickNextButton()
-                .wait(5)
-                .fillPassword(password)
-                .wait(5)
-                .clickSignInButton()
-                .wait(5)
-                .clickProfileButton()
-                .wait(5)
-                .clickLogoutButton();
-        */
     }
 }

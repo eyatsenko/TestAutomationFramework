@@ -14,9 +14,7 @@ import static java.util.Arrays.stream;
 public enum Target {
 
     LOCAL("local"),
-    LOCAL_SUITE("local-suite"),
-    SELENIUM_GRID("selenium-grid"),
-    TESTCONTAINERS("testcontainers");
+    LOCAL_SUITE("local-suite");
 
     private final String value;
     private static final Map<String, Target> ENUM_MAP;
