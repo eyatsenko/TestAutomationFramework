@@ -37,7 +37,7 @@ public class MainPage extends AbstractPageObject {
         return this;
     }
 
-    @Step
+    @Step("Click on Forms Card")
     public MainPage clickFormsCard() {
         waitUtils.waitForElementToBeClickable(formsCard);
         formsCard.click();

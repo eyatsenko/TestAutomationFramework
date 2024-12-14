@@ -7,14 +7,12 @@ import com.example.page.demoqa.PracticeFormPage;
 import com.example.page.demoqa.components.CalendarComponent;
 import com.example.page.demoqa.components.FormModalWindow;
 import com.example.page.demoqa.components.FormsSidebarMenu;
-import com.example.utilities.JsUtils;
 import com.example.utilities.RandomDataUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.text.ParseException;
-import java.util.Arrays;
 
 public class FormsTests extends BaseTest {
     private MainPage mainPage;
@@ -35,77 +33,37 @@ public class FormsTests extends BaseTest {
 
     @Test(description = "Check form filling")
     public void FillFormTest() throws ParseException {
-        logAndStep("Click on Forms Card");
         mainPage.clickFormsCard();
 
-        logAndStep("Click on Login menu item in Sidebar");
         formsSidebarMenu.clickPracticeFormMenuItem();
 
-        logAndStep("Fill firstname: " + user.getFirstName());
-        formPage.fillFirstName(user.getFirstName());
+        formPage.fillFirstName(user.getFirstName())
+                .fillLastName(user.getLastName())
+                .fillEmailField(user.getEmail())
+                .selectGender(user.getGender())
+                .fillNumberField(user.getMobileNumber())
+                .clickOnCalendar().setDate(12, "May", 2015);
 
-        logAndStep("Fill lastname: " + user.getLastName());
-        formPage.fillLastName(user.getLastName());
-
-        logAndStep("Fill email: " + user.getEmail());
-        formPage.fillEmailField(user.getEmail());
-
-        logAndStep("Select Gender: " + user.getGender());
-        formPage.selectGender(user.getGender());
-
-        logAndStep("Fill Mobile Number: " + user.getMobileNumber());
-        formPage.fillNumberField(user.getMobileNumber());
-        JsUtils.scrollToBottom();
-
-        logAndStep("Click on Calendar");
-        calendar = formPage.clickOnCalendar();
-
-        logAndStep("Fill Date of birth");
-        calendar.setDate(12, "May", 2015);
-
-        logAndStep("Fill Subjects: " + String.join(", ", user.getSubjects()));
-        formPage.fillSubjects(user.getSubjects());
-
-        logAndStep("Select Hobbies");
-        formPage.selectHobbies(user.getHobbies());
-
-        logAndStep("Select Picture");
-        formPage.uploadPicture(user.getPicture());
-
-        logAndStep("Fill Current Address: " + user.getCurrentAddress());
-        formPage.fillCurrentAddress(user.getCurrentAddress());
-
-        logAndStep("Select State: " + user.getState());
-        formPage.selectState(user.getState());
-
-        logAndStep("Select City: " + user.getCity());
-        formPage.selectCity(user.getCity());
-
-        logAndStep("Click Submit button");
-        JsUtils.scrollToBottom();
-        formPage.clickSubmitButton();
+        formPage.fillSubjects(user.getSubjects())
+                .selectHobbies(user.getHobbies())
+                .uploadPicture(user.getPicture())
+                .fillCurrentAddress(user.getCurrentAddress())
+                .selectState(user.getState())
+                .selectCity(user.getCity())
+                .clickSubmitButton();
 
         logAndStep("Check that Modal Window is displayed");
         Assert.assertTrue(formModalWindow.isModalTableDisplayed());
 
-        logAndStep("Check that username is: " + user.getFirstName() + " " + user.getLastName());
-        formModalWindow.verifyResult("Student Name", user.getFirstName() + " " + user.getLastName());
-        logAndStep("Check that Email is: " + user.getEmail());
-        formModalWindow.verifyResult("Student Email", user.getEmail());
-        logAndStep("Check that Gender is: " + user.getGender());
-        formModalWindow.verifyResult("Gender", user.getGender());
-        logAndStep("Check that Mobile is: " + user.getMobileNumber());
-        formModalWindow.verifyResult("Mobile", user.getMobileNumber());
-        logAndStep("Check that Date of Birth is: " + user.getDateOfBirth());
-        formModalWindow.verifyResult("Date of Birth", "12 May,2015");
-        logAndStep("Check that Subjects is: " + Arrays.toString(user.getSubjects()));
-        formModalWindow.verifyResult("Subjects", (String.join(", ", user.getSubjects())));
-        logAndStep("Check that Address is: " + user.getCurrentAddress());
-        formModalWindow.verifyResult("Address", user.getCurrentAddress());
-        logAndStep("Check that State and City is: " + user.getState() + " " + user.getCity());
-        formModalWindow.verifyResult("State and City", user.getState() + " " + user.getCity());
+        formModalWindow.verifyModalResult("Student Name", user.getFirstName() + " " + user.getLastName());
+        formModalWindow.verifyModalResult("Student Email", user.getEmail());
+        formModalWindow.verifyModalResult("Gender", user.getGender());
+        formModalWindow.verifyModalResult("Mobile", user.getMobileNumber());
+        formModalWindow.verifyModalResult("Date of Birth", "12 May,2015");
+        formModalWindow.verifyModalResult("Subjects", (String.join(", ", user.getSubjects())));
+        formModalWindow.verifyModalResult("Address", user.getCurrentAddress());
+        formModalWindow.verifyModalResult("State and City", user.getState() + " " + user.getCity());
 
-        logAndStep("Close modal window");
         formModalWindow.clickCloseModalButton();
     }
 }

@@ -24,16 +24,15 @@ public class FormModalWindow extends AbstractPageObject {
         return modalTable.isDisplayed();
     }
 
-    @Step
-    public FormModalWindow verifyResult(String key, String value) {
+    @Step("Check that {key} is: {value}")
+    public FormModalWindow verifyModalResult(String key, String value) {
         WebElement parentElement = modalTable.findElement(By.xpath(".//*[text()='" + key + "']/parent::*"));
         String values = parentElement.getText().replace(key,"").trim();
-
         Assert.assertEquals(values, value);
         return this;
     }
 
-    @Step
+    @Step("Close modal window")
     public FormModalWindow clickCloseModalButton() {
         waitUtils.waitForElementToBeClickable(closeModalButton);
         closeModalButton.click();
