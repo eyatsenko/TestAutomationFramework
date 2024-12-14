@@ -1,15 +1,14 @@
 package com.example.testcase.demoqa;
 
 import com.example.base.BaseTest;
-import com.example.driver.DriverManager;
 import com.example.models.User;
 import com.example.page.demoqa.MainPage;
 import com.example.page.demoqa.PracticeFormPage;
 import com.example.page.demoqa.components.CalendarComponent;
 import com.example.page.demoqa.components.FormModalWindow;
 import com.example.page.demoqa.components.FormsSidebarMenu;
+import com.example.utilities.JsUtils;
 import com.example.utilities.RandomDataUtils;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -24,7 +23,6 @@ public class FormsTests extends BaseTest {
     private FormsSidebarMenu formsSidebarMenu;
     private User user;
     private CalendarComponent calendar;
-    private JavascriptExecutor js;
 
     @BeforeMethod
     public void setUp() {
@@ -33,7 +31,6 @@ public class FormsTests extends BaseTest {
         formModalWindow = new FormModalWindow();
         formsSidebarMenu = new FormsSidebarMenu();
         user = RandomDataUtils.getRandomUser();
-        js = (JavascriptExecutor) DriverManager.getDriver();
     }
 
     @Test(description = "Check form filling")
@@ -58,7 +55,7 @@ public class FormsTests extends BaseTest {
 
         logAndStep("Fill Mobile Number: " + user.getMobileNumber());
         formPage.fillNumberField(user.getMobileNumber());
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        JsUtils.scrollToBottom();
 
         logAndStep("Click on Calendar");
         calendar = formPage.clickOnCalendar();
@@ -85,7 +82,7 @@ public class FormsTests extends BaseTest {
         formPage.selectCity(user.getCity());
 
         logAndStep("Click Submit button");
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        JsUtils.scrollToBottom();
         formPage.clickSubmitButton();
 
         logAndStep("Check that Modal Window is displayed");
