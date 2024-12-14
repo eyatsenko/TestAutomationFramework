@@ -24,7 +24,7 @@ public class CalendarComponent extends AbstractPageObject {
     @FindBy(xpath = "//select[@class='react-datepicker__year-select']")
     private WebElement yearDatePicker;
 
-    @Step
+    @Step("Fill Date of birth")
     public void setDate(int day, String month, int year) throws ParseException {
         Select yearSelect = new Select(yearDatePicker);
         Select monthSelect = new Select(monthDatePicker);

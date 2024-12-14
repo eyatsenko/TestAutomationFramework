@@ -1,11 +1,10 @@
 package com.example.page.demoqa;
 
-import com.example.driver.DriverManager;
 import com.example.page.AbstractPageObject;
 import com.example.page.demoqa.components.CalendarComponent;
+import com.example.utilities.JsUtils;
 import io.qameta.allure.Step;
 import lombok.Getter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -69,28 +68,28 @@ public class PracticeFormPage extends AbstractPageObject {
     boolean isReadingSelected = false;
     boolean isMusicSelected = false;
 
-    @Step
+    @Step("Fill firstname: {firstname}")
     public PracticeFormPage fillFirstName(String firstname) {
         waitUtils.waitForElementToBeClickable(firstNameField);
         firstNameField.sendKeys(firstname);
         return this;
     }
 
-    @Step
+    @Step("Fill lastname: {lastname}")
     public PracticeFormPage fillLastName(String lastname) {
         waitUtils.waitForElementToBeClickable(lastNameField);
         lastNameField.sendKeys(lastname);
         return this;
     }
 
-    @Step
+    @Step("Fill email: {email}")
     public PracticeFormPage fillEmailField(String email) {
         waitUtils.waitForElementToBeClickable(userEmailField);
         userEmailField.sendKeys(email);
         return this;
     }
 
-    @Step
+    @Step("Select gender: {gender}")
     public PracticeFormPage selectGender(String gender) {
         switch (gender) {
             case "Male": {
@@ -118,14 +117,15 @@ public class PracticeFormPage extends AbstractPageObject {
         return this;
     }
 
-    @Step
+    @Step("Open calendar")
     public CalendarComponent clickOnCalendar() {
+        JsUtils.scrollToBottom();
         waitUtils.waitForElementToBeClickable(dateOfBirth);
         dateOfBirth.click();
         return new CalendarComponent();
     }
 
-    @Step
+    @Step("Fill Subjects: {subjects}")
     public PracticeFormPage fillSubjects(String[] subjects) {
         for (String subject : subjects) {
             subjectsInput.sendKeys(subject);
@@ -134,7 +134,7 @@ public class PracticeFormPage extends AbstractPageObject {
         return this;
     }
 
-    @Step
+    @Step("Select Hobbies: {hobbies}")
     public PracticeFormPage selectHobbies(String[] hobbies) {
         for (String hobby : hobbies) {
             switch (hobby) {
@@ -170,21 +170,21 @@ public class PracticeFormPage extends AbstractPageObject {
         return this;
     }
 
-    @Step
+    @Step("Upload a Picture: {path}")
     public PracticeFormPage uploadPicture (String path) {
         waitUtils.waitForElementToBeClickable(uploadPictureButton);
         uploadPictureButton.sendKeys(path);
         return this;
     }
 
-    @Step
+    @Step("Fill CurrentAddress: {CurrentAddress}")
     public PracticeFormPage fillCurrentAddress(String address) {
         waitUtils.waitForElementToBeClickable(currentAddressField);
         currentAddressField.sendKeys(address);
         return this;
     }
 
-    @Step
+    @Step("Select State: {stateName}")
     public PracticeFormPage selectState(String stateName) {
         waitUtils.waitForElementToBeClickable(selectStateDropDownList);
         selectStateDropDownList.sendKeys(stateName);
@@ -192,7 +192,7 @@ public class PracticeFormPage extends AbstractPageObject {
         return this;
     }
 
-    @Step
+    @Step("Select City: {cityName}")
     public PracticeFormPage selectCity(String cityName) {
         waitUtils.waitForElementToBeClickable(selectCityDropDownList);
         selectCityDropDownList.sendKeys(cityName);
@@ -200,10 +200,17 @@ public class PracticeFormPage extends AbstractPageObject {
         return this;
     }
 
-    @Step
+    @Step("Click on Submit Button")
     public PracticeFormPage clickSubmitButton() {
+        JsUtils.scrollToBottom();
         waitUtils.waitForElementToBeClickable(submitButton);
         submitButton.click();
         return this;
     }
+
+//    @Step("Check that Modal Window is displayed")
+//    public PracticeFormPage clickSubmitButton() {
+//        Assert.assertTrue(formModalWindow.isModalTableDisplayed());
+//        return this;
+//    }
 }

@@ -14,7 +14,7 @@ public class FormsSidebarMenu extends AbstractPageObject {
     @FindBy(xpath = "//span[normalize-space()='Practice Form']")
     private WebElement practiceFormMenuItem;
 
-    @Step
+    @Step("Click on Login menu item in Sidebar")
     public FormsSidebarMenu clickPracticeFormMenuItem() {
         waitUtils.waitForElementToBeClickable(practiceFormMenuItem);
         practiceFormMenuItem.click();
