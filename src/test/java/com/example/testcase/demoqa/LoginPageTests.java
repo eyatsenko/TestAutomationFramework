@@ -1,16 +1,15 @@
 package com.example.testcase.demoqa;
 
 import com.example.base.BaseTest;
-import com.example.driver.DriverManager;
 import com.example.models.User;
 import com.example.page.demoqa.LoginPage;
 import com.example.page.demoqa.MainPage;
 import com.example.page.demoqa.RegistrationPage;
+import com.example.utilities.JsUtils;
 import com.example.utilities.RandomDataUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -24,7 +23,6 @@ public class LoginPageTests extends BaseTest {
     private LoginPage loginPage;
     private RegistrationPage registrationPage;
     private User user;
-    private JavascriptExecutor js;
 
     @BeforeMethod
     public void setUp() {
@@ -33,14 +31,12 @@ public class LoginPageTests extends BaseTest {
         registrationPage = new RegistrationPage();
         bsaSidebarMenu = new BookStoreApplicationSidebarMenu();
         user = RandomDataUtils.getRandomUser();
-        js = (JavascriptExecutor) DriverManager.getDriver();
     }
 
     @Description("This test validates the login functionality")
     @Test(description = "Check login")
     public void LoginTest() {
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-
+        JsUtils.scrollToBottom();
         logAndStep("Click on Book Store Application Card");
         mainPage.clickBookStoreApplicationCard();
 
@@ -62,8 +58,7 @@ public class LoginPageTests extends BaseTest {
     @Description("This test validates the Register User functionality")
     @Test(description = "Check user registration")
     public void RegisterTest() {
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-
+        JsUtils.scrollToBottom();
         logAndStep("Click on Book Store Application Card");
         mainPage.clickBookStoreApplicationCard();
 
@@ -85,7 +80,7 @@ public class LoginPageTests extends BaseTest {
         logAndStep("Fill password " + "'" + user.getPassword()+ "'" + " on the Registration Page");
         registrationPage.fillPassword(user.getPassword());
 
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        JsUtils.scrollToBottom();
 
         logAndStep("Click on Register Button");
         registrationPage.clickRegisterButton();
