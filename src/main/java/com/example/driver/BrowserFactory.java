@@ -1,7 +1,6 @@
 package com.example.driver;
 
 import com.example.data.changeless.BrowserData;
-import com.example.exceptions.HeadlessNotSupportedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,12 +10,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 
 import static com.example.config.ConfigurationManager.configuration;
-import static java.lang.Boolean.TRUE;
 
 public enum BrowserFactory {
 
@@ -96,26 +92,6 @@ public enum BrowserFactory {
             }
 
             return edgeOptions;
-        }
-    }, SAFARI {
-        @Override
-        public WebDriver createLocalDriver() {
-            return new SafariDriver(getOptions());
-        }
-
-        public WebDriver createTestContainerDriver() {
-            throw new IllegalArgumentException("Browser Safari not supported on TestContainers yet");
-        }
-
-        @Override
-        public SafariOptions getOptions() {
-            var safariOptions = new SafariOptions();
-            safariOptions.setAutomaticInspection(false);
-
-            if (TRUE.equals(configuration().headless()))
-                throw new HeadlessNotSupportedException(safariOptions.getBrowserName());
-
-            return safariOptions;
         }
     };
 
