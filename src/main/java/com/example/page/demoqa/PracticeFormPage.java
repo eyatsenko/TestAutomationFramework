@@ -7,6 +7,9 @@ import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import java.text.ParseException;
 
 import static com.example.driver.DriverManager.waitUtils;
 import static org.openqa.selenium.Keys.ENTER;
@@ -83,7 +86,7 @@ public class PracticeFormPage extends AbstractPageObject {
     }
 
     @Step("Fill email: {email}")
-    public PracticeFormPage fillEmailField(String email) {
+    public PracticeFormPage fillEmail(String email) {
         waitUtils.waitForElementToBeClickable(userEmailField);
         userEmailField.sendKeys(email);
         return this;
@@ -110,19 +113,25 @@ public class PracticeFormPage extends AbstractPageObject {
         }
     }
 
-    @Step
-    public PracticeFormPage fillNumberField(String number) {
+    @Step("Fill phone number: {number}")
+    public PracticeFormPage fillNumber(String number) {
         waitUtils.waitForElementToBeClickable(userNumberField);
         userNumberField.sendKeys(number);
         return this;
     }
 
     @Step("Open calendar")
-    public CalendarComponent clickOnCalendar() {
+    public CalendarComponent openCalendar() {
         JsUtils.scrollToBottom();
         waitUtils.waitForElementToBeClickable(dateOfBirth);
         dateOfBirth.click();
         return new CalendarComponent();
+    }
+
+    @Step("Set DOB")
+    public PracticeFormPage setDateOfBirth(int day, String month, int year) throws ParseException {
+        openCalendar().setDate(day, month, year);
+        return this;
     }
 
     @Step("Fill Subjects: {subjects}")
@@ -153,7 +162,7 @@ public class PracticeFormPage extends AbstractPageObject {
                         readingCheckBox.click();
                         isReadingSelected = true;
                     }
-                    return this;
+                    break;
                 }
                 case "Music": {
                     waitUtils.waitForElementToBeClickable(musicCheckBox);
@@ -161,17 +170,17 @@ public class PracticeFormPage extends AbstractPageObject {
                         musicCheckBox.click();
                         isMusicSelected = true;
                     }
-                    return this;
+                    break;
                 }
                 default:
-                    return this;
+                    break;
             }
         }
         return this;
     }
 
     @Step("Upload a Picture: {path}")
-    public PracticeFormPage uploadPicture (String path) {
+    public PracticeFormPage uploadPicture(String path) {
         waitUtils.waitForElementToBeClickable(uploadPictureButton);
         uploadPictureButton.sendKeys(path);
         return this;
@@ -201,16 +210,30 @@ public class PracticeFormPage extends AbstractPageObject {
     }
 
     @Step("Click on Submit Button")
-    public PracticeFormPage clickSubmitButton() {
+    public void submitForm() {
         JsUtils.scrollToBottom();
         waitUtils.waitForElementToBeClickable(submitButton);
         submitButton.click();
-        return this;
     }
 
-//    @Step("Check that Modal Window is displayed")
-//    public PracticeFormPage clickSubmitButton() {
-//        Assert.assertTrue(formModalWindow.isModalTableDisplayed());
-//        return this;
-//    }
+    @Step("Check that First Name field is highlighted in red")
+    public void checkThatFirstNameFieldIsHighlightedInRed() {
+        JsUtils.scrollToTop();
+        String currentColor = firstNameField.getCssValue("border-color");
+        Assert.assertEquals(currentColor, "rgb(220, 53, 69)");
+    }
+
+    @Step("Check that Last Name field is highlighted in red")
+    public void checkThatLastNameFieldIsHighlightedInRed() {
+        JsUtils.scrollToTop();
+        String currentColor = lastNameField.getCssValue("border-color");
+        Assert.assertEquals(currentColor, "rgb(220, 53, 69)");
+    }
+
+    @Step("Check that Phone Number field is highlighted in red")
+    public void checkThatPhoneNumberFieldIsHighlightedInRed() {
+        JsUtils.scrollToTop();
+        String currentColor = userNumberField.getCssValue("border-color");
+        Assert.assertEquals(currentColor, "rgb(220, 53, 69)");
+    }
 }
