@@ -1,5 +1,6 @@
 package com.example.page.demoqa;
 
+import com.example.utilities.JsUtils;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -31,44 +32,45 @@ public class MainPage extends AbstractPageObject {
 
 
     @Step
-    public MainPage clickElementsCard() {
+    public MainPage openElementsPage() {
         waitUtils.waitForElementToBeClickable(elementsCard);
         elementsCard.click();
         return this;
     }
 
-    @Step("Click on Forms Card")
-    public MainPage clickFormsCard() {
+    @Step("Open Forms Page")
+    public MainPage openFormsPage() {
         waitUtils.waitForElementToBeClickable(formsCard);
         formsCard.click();
         return this;
     }
 
     @Step
-    public MainPage clickAlertFrameWindowsCard() {
+    public MainPage openAlertFrameWindowsPage() {
         waitUtils.waitForElementToBeClickable(alertFrameWindowsCard);
         alertFrameWindowsCard.click();
         return this;
     }
 
     @Step
-    public MainPage clickWidgetsCard() {
+    public MainPage openWidgetsPage() {
         waitUtils.waitForElementToBeClickable(widgetsCard);
         widgetsCard.click();
         return this;
     }
 
     @Step
-    public MainPage clickInteractionsCard() {
+    public MainPage openInteractionsPage() {
         waitUtils.waitForElementToBeClickable(interactionsCard);
         interactionsCard.click();
         return this;
     }
 
-    @Step
-    public MainPage clickBookStoreApplicationCard() {
+    @Step("Open Book Store Application Page")
+    public BookStoreApplicationPage openBookStoreApplicationPage() {
+        JsUtils.scrollToBottom();
         waitUtils.waitForElementToBeClickable(bookStoreApplicationCard);
         bookStoreApplicationCard.click();
-        return this;
+        return new BookStoreApplicationPage();
     }
 }

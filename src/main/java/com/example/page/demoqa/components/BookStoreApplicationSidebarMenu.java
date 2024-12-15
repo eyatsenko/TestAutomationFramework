@@ -14,7 +14,7 @@ public class BookStoreApplicationSidebarMenu extends AbstractPageObject {
     @FindBy(xpath = "//span[normalize-space()='Login']")
     private WebElement loginMenuItem;
 
-    @Step
+    @Step("Click on Login menu item in Sidebar")
     public BookStoreApplicationSidebarMenu clickLoginMenuItem() {
         waitUtils.waitForElementToBeClickable(loginMenuItem);
         loginMenuItem.click();

@@ -5,6 +5,7 @@ import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import static com.example.driver.DriverManager.waitUtils;
 
@@ -25,31 +26,39 @@ public class LoginPage extends AbstractPageObject {
     @FindBy(xpath = "//label[@id='userName-value']")
     private WebElement userNameLabel;
 
-    @Step("Fill password on the Login Page")
+    @FindBy(xpath = "//p[@id='name']")
+    private WebElement errorMessage;
+
+    @Step("Fill username '{username}' on the Login Page")
     public LoginPage fillUserName(String username) {
         waitUtils.waitForElementToBeClickable(userNameInput);
         userNameInput.sendKeys(username);
         return this;
     }
 
-    @Step
+    @Step("Fill password '{password}' on the Login Page")
     public LoginPage fillPassword(String password) {
         waitUtils.waitForElementToBeClickable(passwordInput);
         passwordInput.sendKeys(password);
         return this;
     }
 
-    @Step
-    public LoginPage clickLoginButton() {
+    @Step("Confirm login")
+    public void confirmLogin() {
         waitUtils.waitForElementToBeClickable(loginButton);
         loginButton.click();
-        return this;
     }
 
-    @Step
-    public LoginPage clickNewUserButton() {
+    @Step("Open Registration Form")
+    public RegistrationPage openRegistrationForm() {
         waitUtils.waitForElementToBeClickable(newUserButton);
         newUserButton.click();
-        return this;
+        return new RegistrationPage();
+    }
+
+    @Step("Check error message")
+    public void checkErrorMessage() {
+        waitUtils.waitForElementToBeVisible(errorMessage);
+        Assert.assertEquals(errorMessage.getText(), "Invalid username or password!");
     }
 }

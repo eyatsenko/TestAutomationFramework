@@ -31,7 +31,7 @@ public class FormsTests extends BaseTest {
 
     @Test(description = "Check form filling with all valid data", priority = 1)
     public void fillAllFormTest() throws ParseException {
-        mainPage.clickFormsCard();
+        mainPage.openFormsPage();
 
         formsSidebarMenu.clickPracticeFormMenuItem();
 
@@ -67,7 +67,7 @@ public class FormsTests extends BaseTest {
 
     @Test(description = "Check form filling with only required fields", priority = 2)
     public void fillRequiredFieldsFormTest() throws ParseException {
-        mainPage.clickFormsCard();
+        mainPage.openFormsPage();
 
         formsSidebarMenu.clickPracticeFormMenuItem();
 
@@ -96,7 +96,7 @@ public class FormsTests extends BaseTest {
 
     @Test(description = "Check form filling with missing First Name", priority = 3)
     public void fillAllFormMissingFirstNameTest() throws ParseException {
-        mainPage.clickFormsCard();
+        mainPage.openFormsPage();
 
         formsSidebarMenu.clickPracticeFormMenuItem();
 
@@ -119,7 +119,7 @@ public class FormsTests extends BaseTest {
 
     @Test(description = "Check form filling with missing Last Name", priority = 4)
     public void fillAllFormMissingLastNameTest() throws ParseException {
-        mainPage.clickFormsCard();
+        mainPage.openFormsPage();
 
         formsSidebarMenu.clickPracticeFormMenuItem();
 
@@ -142,7 +142,7 @@ public class FormsTests extends BaseTest {
 
     @Test(description = "Check form filling with missing Phone Number", priority = 5)
     public void fillAllFormMissingPhoneNumberTest() throws ParseException {
-        mainPage.clickFormsCard();
+        mainPage.openFormsPage();
 
         formsSidebarMenu.clickPracticeFormMenuItem();
 
