@@ -30,9 +30,9 @@ public class MainPage extends AbstractPageObject {
     @FindBy(xpath = "//h5[text()='Book Store Application']")
     private WebElement bookStoreApplicationCard;
 
-
-    @Step
+    @Step("Open 'Elements' page")
     public MainPage openElementsPage() {
+        logger.info("Open 'Elements' page");
         waitUtils.waitForElementToBeClickable(elementsCard);
         elementsCard.click();
         return this;
@@ -40,27 +40,31 @@ public class MainPage extends AbstractPageObject {
 
     @Step("Open Forms Page")
     public MainPage openFormsPage() {
+        logger.info("Open 'Forms' page");
         waitUtils.waitForElementToBeClickable(formsCard);
         formsCard.click();
         return this;
     }
 
-    @Step
+    @Step("Open 'Alert Frame Windows' page")
     public MainPage openAlertFrameWindowsPage() {
+        logger.info("Open 'Alert Frame Windows' page");
         waitUtils.waitForElementToBeClickable(alertFrameWindowsCard);
         alertFrameWindowsCard.click();
         return this;
     }
 
-    @Step
+    @Step("Open 'Widgets' page")
     public MainPage openWidgetsPage() {
+        logger.info("Open 'Widgets' page");
         waitUtils.waitForElementToBeClickable(widgetsCard);
         widgetsCard.click();
         return this;
     }
 
-    @Step
+    @Step("Open 'Interactions' page")
     public MainPage openInteractionsPage() {
+        logger.info("Open 'Interactions' page");
         waitUtils.waitForElementToBeClickable(interactionsCard);
         interactionsCard.click();
         return this;
@@ -68,6 +72,7 @@ public class MainPage extends AbstractPageObject {
 
     @Step("Open Book Store Application Page")
     public BookStoreApplicationPage openBookStoreApplicationPage() {
+        logger.info("Open 'Book Store Application' page");
         JsUtils.scrollToBottom();
         waitUtils.waitForElementToBeClickable(bookStoreApplicationCard);
         bookStoreApplicationCard.click();

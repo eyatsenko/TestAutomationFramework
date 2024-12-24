@@ -73,6 +73,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Fill firstname: {firstname}")
     public PracticeFormPage fillFirstName(String firstname) {
+        logger.info("Filling 'First Name' field with value: '{}'", firstname);
         waitUtils.waitForElementToBeClickable(firstNameField);
         firstNameField.sendKeys(firstname);
         return this;
@@ -80,6 +81,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Fill lastname: {lastname}")
     public PracticeFormPage fillLastName(String lastname) {
+        logger.info("Filling 'Last Name' field with value: '{}'", lastname);
         waitUtils.waitForElementToBeClickable(lastNameField);
         lastNameField.sendKeys(lastname);
         return this;
@@ -87,6 +89,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Fill email: {email}")
     public PracticeFormPage fillEmail(String email) {
+        logger.info("Filling 'Email' field with value: '{}'", email);
         waitUtils.waitForElementToBeClickable(userEmailField);
         userEmailField.sendKeys(email);
         return this;
@@ -94,6 +97,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Select gender: {gender}")
     public PracticeFormPage selectGender(String gender) {
+        logger.info("Select gender: {}", gender);
         switch (gender) {
             case "Male": {
                 waitUtils.waitForElementToBeClickable(maleRadioButton);
@@ -115,6 +119,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Fill phone number: {number}")
     public PracticeFormPage fillNumber(String number) {
+        logger.info("Filling 'Phone Number' field with value: '{}'", number);
         waitUtils.waitForElementToBeClickable(userNumberField);
         userNumberField.sendKeys(number);
         return this;
@@ -122,6 +127,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Open calendar")
     public CalendarComponent openCalendar() {
+        logger.info("Open Calendar");
         JsUtils.scrollToBottom();
         waitUtils.waitForElementToBeClickable(dateOfBirth);
         dateOfBirth.click();
@@ -130,12 +136,14 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Set DOB")
     public PracticeFormPage setDateOfBirth(int day, String month, int year) throws ParseException {
+        logger.info("Filling 'DOB' field with value: '{}'", year);
         openCalendar().setDate(day, month, year);
         return this;
     }
 
     @Step("Fill Subjects: {subjects}")
     public PracticeFormPage fillSubjects(String[] subjects) {
+        logger.info("Filling 'Subjects' field with value: '{}'", subjects);
         for (String subject : subjects) {
             subjectsInput.sendKeys(subject);
             subjectsInput.sendKeys(ENTER);
@@ -145,6 +153,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Select Hobbies: {hobbies}")
     public PracticeFormPage selectHobbies(String[] hobbies) {
+        logger.info("Filling 'Hobbies' field with value: '{}'", hobbies);
         for (String hobby : hobbies) {
             switch (hobby) {
                 case "Sports": {
@@ -181,13 +190,15 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Upload a Picture: {path}")
     public PracticeFormPage uploadPicture(String path) {
+        logger.info("Upload a picture: '{}'", path);
         waitUtils.waitForElementToBeClickable(uploadPictureButton);
         uploadPictureButton.sendKeys(path);
         return this;
     }
 
-    @Step("Fill CurrentAddress: {CurrentAddress}")
+    @Step("Fill CurrentAddress: {address}")
     public PracticeFormPage fillCurrentAddress(String address) {
+        logger.info("Filling 'Current Address' field with value: '{}'", address);
         waitUtils.waitForElementToBeClickable(currentAddressField);
         currentAddressField.sendKeys(address);
         return this;
@@ -195,6 +206,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Select State: {stateName}")
     public PracticeFormPage selectState(String stateName) {
+        logger.info("Select 'State': '{}'", stateName);
         waitUtils.waitForElementToBeClickable(selectStateDropDownList);
         selectStateDropDownList.sendKeys(stateName);
         selectStateDropDownList.sendKeys(ENTER);
@@ -203,6 +215,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Select City: {cityName}")
     public PracticeFormPage selectCity(String cityName) {
+        logger.info("Select 'City': '{}'", cityName);
         waitUtils.waitForElementToBeClickable(selectCityDropDownList);
         selectCityDropDownList.sendKeys(cityName);
         selectCityDropDownList.sendKeys(ENTER);
@@ -211,6 +224,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Click on Submit Button")
     public void submitForm() {
+        logger.info("Submitting Form");
         JsUtils.scrollToBottom();
         waitUtils.waitForElementToBeClickable(submitButton);
         submitButton.click();
@@ -218,6 +232,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Check that First Name field is highlighted in red")
     public void checkThatFirstNameFieldIsHighlightedInRed() {
+        logger.info("Check that First Name field is highlighted in red");
         JsUtils.scrollToTop();
         String currentColor = firstNameField.getCssValue("border-color");
         Assert.assertEquals(currentColor, "rgb(220, 53, 69)");
@@ -225,6 +240,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Check that Last Name field is highlighted in red")
     public void checkThatLastNameFieldIsHighlightedInRed() {
+        logger.info("Check that Last Name field is highlighted in red");
         JsUtils.scrollToTop();
         String currentColor = lastNameField.getCssValue("border-color");
         Assert.assertEquals(currentColor, "rgb(220, 53, 69)");
@@ -232,6 +248,7 @@ public class PracticeFormPage extends AbstractPageObject {
 
     @Step("Check that Phone Number field is highlighted in red")
     public void checkThatPhoneNumberFieldIsHighlightedInRed() {
+        logger.info("Check that Phone Number field is highlighted in red");
         JsUtils.scrollToTop();
         String currentColor = userNumberField.getCssValue("border-color");
         Assert.assertEquals(currentColor, "rgb(220, 53, 69)");
