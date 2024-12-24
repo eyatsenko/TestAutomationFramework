@@ -9,8 +9,6 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testcontainers.containers.BrowserWebDriverContainer;
 
 import static com.example.config.ConfigurationManager.configuration;
 
@@ -20,15 +18,6 @@ public enum BrowserFactory {
         @Override
         public WebDriver createLocalDriver() {
             return new ChromeDriver(getOptions());
-        }
-
-        @Override
-        public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
-                                                                                .withCapabilities(new ChromeOptions());
-            driverContainer.start();
-
-            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new ChromeOptions());
         }
 
         @Override
@@ -49,15 +38,6 @@ public enum BrowserFactory {
         }
 
         @Override
-        public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
-                                                                                .withCapabilities(new FirefoxOptions());
-            driverContainer.start();
-
-            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new FirefoxOptions());
-        }
-
-        @Override
         public FirefoxOptions getOptions() {
             var firefoxOptions = new FirefoxOptions();
             firefoxOptions.addArguments(BrowserData.getDefaultOptions());
@@ -74,14 +54,6 @@ public enum BrowserFactory {
             return new EdgeDriver(getOptions());
         }
 
-        public WebDriver createTestContainerDriver() {
-            BrowserWebDriverContainer<?> driverContainer = new BrowserWebDriverContainer<>()
-                                                                                   .withCapabilities(new EdgeOptions());
-            driverContainer.start();
-
-            return new RemoteWebDriver(driverContainer.getSeleniumAddress(), new EdgeOptions());
-        }
-
         @Override
         public EdgeOptions getOptions() {
             var edgeOptions = new EdgeOptions();
@@ -95,22 +67,7 @@ public enum BrowserFactory {
         }
     };
 
-    /**
-     * Used to run local tests where the WebDriverManager will take care of the driver
-     *
-     * @return a new WebDriver instance based on the browser set
-     */
     public abstract WebDriver createLocalDriver();
 
-    /**
-     * @return a new AbstractDriverOptions instance based on the browser set
-     */
     public abstract AbstractDriverOptions<?> getOptions();
-
-    /**
-     * Used to run the remote test execution using Testcontainers
-     *
-     * @return a new WebDriver instance based on the browser set
-     */
-    public abstract WebDriver createTestContainerDriver();
 }
