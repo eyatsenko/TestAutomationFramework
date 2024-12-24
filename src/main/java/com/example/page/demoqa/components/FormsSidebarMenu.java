@@ -16,6 +16,7 @@ public class FormsSidebarMenu extends AbstractPageObject {
 
     @Step("Click on Login menu item in Sidebar")
     public FormsSidebarMenu clickPracticeFormMenuItem() {
+        logger.info("Open Practice Form page");
         waitUtils.waitForElementToBeClickable(practiceFormMenuItem);
         practiceFormMenuItem.click();
         return this;

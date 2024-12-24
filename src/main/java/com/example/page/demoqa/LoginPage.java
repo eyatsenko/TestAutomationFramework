@@ -31,6 +31,7 @@ public class LoginPage extends AbstractPageObject {
 
     @Step("Fill username '{username}' on the Login Page")
     public LoginPage fillUserName(String username) {
+        logger.info("Filling 'Username' field with value: '{}'", username);
         waitUtils.waitForElementToBeClickable(userNameInput);
         userNameInput.sendKeys(username);
         return this;
@@ -38,6 +39,7 @@ public class LoginPage extends AbstractPageObject {
 
     @Step("Fill password '{password}' on the Login Page")
     public LoginPage fillPassword(String password) {
+        logger.info("Filling 'Password' field with value: '{}'", password);
         waitUtils.waitForElementToBeClickable(passwordInput);
         passwordInput.sendKeys(password);
         return this;
@@ -45,12 +47,14 @@ public class LoginPage extends AbstractPageObject {
 
     @Step("Confirm login")
     public void confirmLogin() {
+        logger.info("Confirm Login");
         waitUtils.waitForElementToBeClickable(loginButton);
         loginButton.click();
     }
 
     @Step("Open Registration Form")
     public RegistrationPage openRegistrationForm() {
+        logger.info("Open Registration Form");
         waitUtils.waitForElementToBeClickable(newUserButton);
         newUserButton.click();
         return new RegistrationPage();
@@ -58,6 +62,7 @@ public class LoginPage extends AbstractPageObject {
 
     @Step("Check error message")
     public void checkErrorMessage() {
+        logger.info("Check error message");
         waitUtils.waitForElementToBeVisible(errorMessage);
         Assert.assertEquals(errorMessage.getText(), "Invalid username or password!");
     }

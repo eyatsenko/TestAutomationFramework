@@ -2,8 +2,8 @@
 <suite name="Regression Suite">
     <test name="Regression Tests" parallel="none" verbose="0">
         <classes>
-<!--            <class name="com.example.testcase.demoqa.FormsTests"/>-->
-            <class name="com.example.testcase.demoqa.LoginPageTests"/>
+            <class name="com.example.testcase.demoqa.FormsTests"/>
+<!--            <class name="com.example.testcase.demoqa.LoginPageTests"/>-->
         </classes>
     </test>
 </suite>
