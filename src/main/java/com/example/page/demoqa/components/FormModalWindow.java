@@ -27,6 +27,7 @@ public class FormModalWindow extends AbstractPageObject {
 
     @Step("Check that {key} is: {value}")
     public FormModalWindow verifyModalResult(String key, String value) {
+        logger.info("Check that {key} is: {value}");
         WebElement parentElement = modalTable.findElement(By.xpath(".//*[text()='" + key + "']/parent::*"));
         String values = parentElement.getText().replace(key, "").trim();
         Assert.assertEquals(values, value);
@@ -35,6 +36,7 @@ public class FormModalWindow extends AbstractPageObject {
 
     @Step("Close modal window")
     public FormModalWindow closeModalWindow() {
+        logger.info("Close modal window");
         waitUtils.waitForElementToBeClickable(closeModalButton);
         closeModalButton.click();
         return this;
@@ -42,11 +44,13 @@ public class FormModalWindow extends AbstractPageObject {
 
     @Step("Check that Modal Window is displayed")
     public void checkThatModalWindowIsDisplayed() {
+        logger.info("Check that Modal Window is displayed");
         Assert.assertTrue(isModalTableDisplayed());
     }
 
     @Step("Check that Modal Window is not displayed")
     public void checkThatModalWindowIsNotDisplayed() {
+        logger.info("Check that Modal Window is not displayed");
         try {
             modalTable.isDisplayed();
         } catch (NoSuchElementException e) {
