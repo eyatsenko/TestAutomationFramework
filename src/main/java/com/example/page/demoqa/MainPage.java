@@ -1,5 +1,6 @@
 package com.example.page.demoqa;
 
+import com.example.page.demoqa.bookStoreApplication.BookStoreApplicationPage;
 import com.example.utilities.JsUtils;
 import io.qameta.allure.Step;
 import lombok.Getter;

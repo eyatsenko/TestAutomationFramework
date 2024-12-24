@@ -32,7 +32,7 @@ public class SidebarMenu extends AbstractPageObject {
     public SidebarMenu clickElementsMenuItem() {
         waitUtils.waitForElementToBeClickable(elementsMenuItem);
         elementsMenuItem.click();
-        return this;
+        return new ElementsSideBarMenu();
     }
 
     @Step
