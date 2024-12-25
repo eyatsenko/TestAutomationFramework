@@ -1,5 +1,6 @@
-package com.example.page.demoqa.components;
+package com.example.page.demoqa.elements;
 
+import com.example.page.demoqa.components.SidebarMenu;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,11 +15,11 @@ public class ElementsSideBarMenu extends SidebarMenu {
     private WebElement checkBoxMenuItem;
 
     @Step("Click on 'Text Box' item in Sidebar")
-    public ElementsSideBarMenu clickTextBoxMenuItem() {
+    public TextBoxPage clickTextBoxMenuItem() {
         logger.info("Click on 'Text Box' item in Sidebar");
         waitUtils.waitForElementToBeClickable(textBoxMenuItem);
         textBoxMenuItem.click();
-        return this;
+        return new TextBoxPage();
     }
 
     @Step("Click on 'Check Box' item in Sidebar")
