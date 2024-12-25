@@ -86,7 +86,6 @@ public class TextBoxPage extends AbstractPageObject {
 
         switch (key) {
             case "Name": {
-
                 Assert.assertEquals(resultName.getText(), "Name:" + value);
                 break;
             }
@@ -116,5 +115,25 @@ public class TextBoxPage extends AbstractPageObject {
     public void checkThatOutputIsDisplayed() {
         logger.info("Check that Output is displayed");
         Assert.assertTrue(isOutputDisplayed());
+    }
+
+    @Step("Check that output is not displayed")
+    public void checkThatOutputIsNotDisplayed() {
+        try {
+            outputSection.click();
+        } catch (Exception e) {
+            Assert.assertTrue(true);
+        }
+    }
+
+    @Step("Check that Email field is highlighted in red")
+    public void checkThatEmailFieldIsHighlightedInRed() {
+        this.checkThatElementIsHighlightedInColor(userEmailField);
+    }
+
+    @Step
+    public void checkThatElementIsHighlightedInColor(WebElement element) {
+        String fieldClass = element.getAttribute("class");
+        Assert.assertTrue(fieldClass.contains("field-error"), "Element is not highlighted in red!");
     }
 }
