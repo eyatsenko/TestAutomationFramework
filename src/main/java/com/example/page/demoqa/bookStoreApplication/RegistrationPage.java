@@ -1,4 +1,4 @@
-package com.example.page.demoqa;
+package com.example.page.demoqa.bookStoreApplication;
 
 import com.example.driver.DriverManager;
 import com.example.page.AbstractPageObject;

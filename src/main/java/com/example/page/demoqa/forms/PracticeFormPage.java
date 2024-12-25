@@ -1,7 +1,6 @@
-package com.example.page.demoqa;
+package com.example.page.demoqa.forms;
 
 import com.example.page.AbstractPageObject;
-import com.example.page.demoqa.components.CalendarComponent;
 import com.example.utilities.JsUtils;
 import io.qameta.allure.Step;
 import lombok.Getter;

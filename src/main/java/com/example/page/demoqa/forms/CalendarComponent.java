@@ -1,4 +1,4 @@
-package com.example.page.demoqa.components;
+package com.example.page.demoqa.forms;
 
 import com.example.driver.DriverManager;
 import com.example.page.AbstractPageObject;

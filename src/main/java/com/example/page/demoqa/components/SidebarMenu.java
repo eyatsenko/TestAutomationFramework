@@ -1,6 +1,7 @@
 package com.example.page.demoqa.components;
 
 import com.example.page.AbstractPageObject;
+import com.example.page.demoqa.elements.ElementsSideBarMenu;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -32,7 +33,7 @@ public class SidebarMenu extends AbstractPageObject {
     public SidebarMenu clickElementsMenuItem() {
         waitUtils.waitForElementToBeClickable(elementsMenuItem);
         elementsMenuItem.click();
-        return this;
+        return new ElementsSideBarMenu();
     }
 
     @Step

@@ -2,11 +2,11 @@ package com.example.testcase.demoqa;
 
 import com.example.base.BaseTest;
 import com.example.models.User;
-import com.example.page.demoqa.BookStoreApplicationPage;
-import com.example.page.demoqa.LoginPage;
+import com.example.page.demoqa.bookStoreApplication.BookStoreApplicationPage;
+import com.example.page.demoqa.bookStoreApplication.LoginPage;
 import com.example.page.demoqa.MainPage;
-import com.example.page.demoqa.RegistrationPage;
-import com.example.page.demoqa.components.BookStoreApplicationSidebarMenu;
+import com.example.page.demoqa.bookStoreApplication.RegistrationPage;
+import com.example.page.demoqa.bookStoreApplication.BookStoreApplicationSidebarMenu;
 import com.example.utilities.RandomDataUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;

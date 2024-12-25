@@ -32,6 +32,7 @@ public class RandomDataUtils {
                 .setHobbies(new String[]{hobbies[faker.random().nextInt(hobbies.length)]})
                 .setPicture(Paths.get("src", "test", "resources", "img.png").toAbsolutePath().toString())
                 .setCurrentAddress(faker.address().fullAddress())
+                .setPermanentAddress(faker.address().fullAddress())
                 .setState(states[faker.random().nextInt(states.length)]);
 
         switch (randomUser.getState()) {
