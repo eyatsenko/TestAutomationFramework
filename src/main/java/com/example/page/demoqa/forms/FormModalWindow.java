@@ -27,7 +27,7 @@ public class FormModalWindow extends AbstractPageObject {
 
     @Step("Check that {key} is: {value}")
     public FormModalWindow verifyModalResult(String key, String value) {
-        logger.info("Check that {key} is: {value}");
+        logger.info("Check that {} is: {}", key, value);
         WebElement parentElement = modalTable.findElement(By.xpath(".//*[text()='" + key + "']/parent::*"));
         String values = parentElement.getText().replace(key, "").trim();
         Assert.assertEquals(values, value);

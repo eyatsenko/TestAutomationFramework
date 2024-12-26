@@ -23,10 +23,10 @@ public class ElementsSideBarMenu extends SidebarMenu {
     }
 
     @Step("Click on 'Check Box' item in Sidebar")
-    public ElementsSideBarMenu clickCheckBoxMenuItem() {
+    public CheckBoxPage clickCheckBoxMenuItem() {
         logger.info("Click on 'Check Box' item in Sidebar");
         waitUtils.waitForElementToBeClickable(checkBoxMenuItem);
         checkBoxMenuItem.click();
-        return this;
+        return new CheckBoxPage();
     }
 }
