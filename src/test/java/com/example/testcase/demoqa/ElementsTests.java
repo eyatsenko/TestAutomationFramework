@@ -3,6 +3,7 @@ package com.example.testcase.demoqa;
 import com.example.base.BaseTest;
 import com.example.models.User;
 import com.example.page.demoqa.MainPage;
+import com.example.page.demoqa.elements.CheckBoxPage;
 import com.example.page.demoqa.elements.ElementsSideBarMenu;
 import com.example.page.demoqa.elements.TextBoxPage;
 import com.example.utilities.RandomDataUtils;
@@ -14,6 +15,7 @@ public class ElementsTests extends BaseTest {
     private MainPage mainPage;
     private ElementsSideBarMenu elementsSideBarMenu;
     private TextBoxPage textBoxPage;
+    private CheckBoxPage checkBoxPage;
     private User user;
 
     @BeforeMethod
@@ -104,8 +106,19 @@ public class ElementsTests extends BaseTest {
         textBoxPage.checkThatEmailFieldIsHighlightedInRed();
     }
 
+    @Test(description = "Check selecting a particular node", priority = 8, dataProvider = "nodeNamesDataProvider")
+    public void checkSelectingOneNodeTest(String nodeName) {
+        mainPage.openElementsPage();
+
+        checkBoxPage = elementsSideBarMenu.clickCheckBoxMenuItem();
+        checkBoxPage.expandAllNodes();
+        checkBoxPage.selectOneNode(nodeName);
+
+        checkBoxPage.checkThatNodeIsSelected(nodeName);
+    }
+
     @DataProvider(name = "invalidEmailProvider")
-    public static Object[][] provideStrings() {
+    public static Object[][] invalidEmailProvider() {
         return new Object[][]{
                 {"user"},
                 {"user@"},
@@ -113,6 +126,29 @@ public class ElementsTests extends BaseTest {
                 {"user.com"},
                 {"@test.com"},
                 {"@"}
+        };
+    }
+
+    @DataProvider(name = "nodeNamesDataProvider")
+    public static Object[][] nodeNamesDataProvider() {
+        return new Object[][]{
+                {"Home"},
+                {"Desktop"},
+                {"Notes"},
+                {"Commands"},
+                {"Documents"},
+                {"Workspace"},
+                {"React"},
+                {"Angular"},
+                {"Veu"},
+                {"Office"},
+                {"Public"},
+                {"Private"},
+                {"Classified"},
+                {"General"},
+                {"Downloads"},
+                {"Word File.doc"},
+                {"Excel File.doc"}
         };
     }
 }
