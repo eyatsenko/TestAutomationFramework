@@ -12,6 +12,7 @@ import org.testng.Assert;
 import static com.example.driver.DriverManager.waitUtils;
 import static org.testng.Assert.assertEquals;
 
+@SuppressWarnings("unused")
 public class CheckBoxPage extends AbstractPageObject {
     @FindBy(xpath = "//button[@title='Expand all']")
     private WebElement expandButton;

@@ -19,6 +19,8 @@ public class User {
     private String city;
     private String username;
     private String password;
+    private String salary;
+    private String department;
 
     public User setUsername(String username) {
         this.username = username;
@@ -92,6 +94,16 @@ public class User {
 
     public User setPermanentAddress(String permanentAddress) {
         this.permanentAddress = permanentAddress;
+        return this;
+    }
+
+    public User setSalary(String salary) {
+        this.salary = salary;
+        return this;
+    }
+
+    public User setDepartment(String department) {
+        this.department = department;
         return this;
     }
 }

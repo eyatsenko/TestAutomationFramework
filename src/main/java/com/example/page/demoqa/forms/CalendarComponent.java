@@ -16,6 +16,7 @@ import static com.example.driver.DriverManager.waitUtils;
 
 
 @Getter
+@SuppressWarnings("unused")
 public class CalendarComponent extends AbstractPageObject {
 
     @FindBy(xpath = "//select[@class='react-datepicker__month-select']")

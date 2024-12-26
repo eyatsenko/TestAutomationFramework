@@ -1,6 +1,6 @@
 package com.example.testcase.demoqa;
 
-import com.example.base.BaseTest;
+import com.example.base.AbstractBaseTest;
 import com.example.models.User;
 import com.example.page.demoqa.MainPage;
 import com.example.page.demoqa.forms.PracticeFormPage;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import java.nio.file.Paths;
 import java.text.ParseException;
 
-public class FormsTests extends BaseTest {
+public class FormsTests extends AbstractBaseTest {
     private MainPage mainPage;
     private PracticeFormPage formPage;
     private FormModalWindow formModalWindow;

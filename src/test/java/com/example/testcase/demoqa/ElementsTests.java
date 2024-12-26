@@ -1,17 +1,15 @@
 package com.example.testcase.demoqa;
 
-import com.example.base.BaseTest;
+import com.example.base.AbstractBaseTest;
 import com.example.models.User;
 import com.example.page.demoqa.MainPage;
-import com.example.page.demoqa.elements.CheckBoxPage;
-import com.example.page.demoqa.elements.ElementsSideBarMenu;
-import com.example.page.demoqa.elements.TextBoxPage;
+import com.example.page.demoqa.elements.*;
 import com.example.utilities.RandomDataUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class ElementsTests extends BaseTest {
+public class ElementsTests extends AbstractBaseTest {
     private MainPage mainPage;
     private ElementsSideBarMenu elementsSideBarMenu;
     private TextBoxPage textBoxPage;
@@ -94,7 +92,7 @@ public class ElementsTests extends BaseTest {
     }
 
     @Test(description = "Check TextBox page filling with invalid Email", priority = 6,
-                                                dataProvider = "invalidEmailProvider")
+            dataProvider = "invalidEmailProvider")
     public void fillTextBoxPageInvalidEmailTest(String invalidEmail) {
         mainPage.openElementsPage();
 
@@ -106,7 +104,7 @@ public class ElementsTests extends BaseTest {
         textBoxPage.checkThatEmailFieldIsHighlightedInRed();
     }
 
-    @Test(description = "Check selecting a particular node", priority = 8, dataProvider = "nodeNamesDataProvider")
+    @Test(description = "Check selecting a particular node", priority = 7, dataProvider = "nodeNamesDataProvider")
     public void checkSelectingOneNodeTest(String nodeName) {
         mainPage.openElementsPage();
 

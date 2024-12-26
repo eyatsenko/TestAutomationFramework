@@ -11,6 +11,7 @@ import com.example.page.AbstractPageObject;
 import static com.example.driver.DriverManager.waitUtils;
 
 @Getter
+@SuppressWarnings("unused")
 public class MainPage extends AbstractPageObject {
 
     @FindBy(xpath = "//h5[text()='Elements']")

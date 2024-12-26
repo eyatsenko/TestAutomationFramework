@@ -1,6 +1,6 @@
 package com.example.testcase.demoqa;
 
-import com.example.base.BaseTest;
+import com.example.base.AbstractBaseTest;
 import com.example.models.User;
 import com.example.page.demoqa.bookStoreApplication.BookStoreApplicationPage;
 import com.example.page.demoqa.bookStoreApplication.LoginPage;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 @Epic("User Management")
 @Feature("Login & Registration")
-public class LoginPageTests extends BaseTest {
+public class LoginPageTests extends AbstractBaseTest {
     private MainPage mainPage;
     private BookStoreApplicationSidebarMenu bsaSidebarMenu;
     private BookStoreApplicationPage bsaPage;

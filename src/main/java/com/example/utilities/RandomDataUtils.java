@@ -11,7 +11,7 @@ public class RandomDataUtils {
         Faker faker = new Faker();
         User randomUser = new User();
         String[] subjects = {"Maths", "Arts", "History", "Accounting", "Biology", "Physics", "Computer Science",
-                                        "Commerce", "Chemistry", "Civics", "Hindi", "Social Studies", "English"};
+                "Commerce", "Chemistry", "Civics", "Hindi", "Social Studies", "English"};
         String[] sex = {"Male", "Female"};
         String[] hobbies = {"Sports", "Reading", "Music"};
         String[] states = {"NCR", "Uttar Pradesh", "Haryana", "Rajasthan"};
@@ -21,19 +21,21 @@ public class RandomDataUtils {
         String[] citiesRajasthan = {"Jaipur", "Jaiselmer"};
 
         randomUser.setFirstName(faker.name().firstName())
-                .setLastName(faker.name().lastName())
-                .setUsername((randomUser.getFirstName() + randomUser.getLastName()).toLowerCase())
-                .setPassword("Test!12345")
-                .setEmail((randomUser.getFirstName() + "." + randomUser.getLastName()).toLowerCase() + "@fakemail.xyz")
-                .setGender(sex[faker.random().nextInt(sex.length)])
-                .setMobileNumber(faker.numerify("##########"))
-                .setDateOfBirth("12052015")
-                .setSubjects(new String[]{subjects[faker.random().nextInt(subjects.length)]})
-                .setHobbies(new String[]{hobbies[faker.random().nextInt(hobbies.length)]})
-                .setPicture(Paths.get("src", "test", "resources", "img.png").toAbsolutePath().toString())
-                .setCurrentAddress(faker.address().fullAddress())
-                .setPermanentAddress(faker.address().fullAddress())
-                .setState(states[faker.random().nextInt(states.length)]);
+                  .setLastName(faker.name().lastName())
+                  .setUsername((randomUser.getFirstName() + randomUser.getLastName()).toLowerCase())
+                  .setPassword("Test!12345")
+                  .setEmail((randomUser.getFirstName() + "." + randomUser.getLastName()).toLowerCase() + "@fakemail.xyz")
+                  .setGender(sex[faker.random().nextInt(sex.length)])
+                  .setMobileNumber(faker.numerify("##########"))
+                  .setDateOfBirth("12052015") //TODO: add parsing logic
+                  .setSubjects(new String[]{subjects[faker.random().nextInt(subjects.length)]})
+                  .setHobbies(new String[]{hobbies[faker.random().nextInt(hobbies.length)]})
+                  .setPicture(Paths.get("src", "test", "resources", "img.png").toAbsolutePath().toString())
+                  .setCurrentAddress(faker.address().fullAddress())
+                  .setPermanentAddress(faker.address().fullAddress())
+                  .setSalary(String.valueOf(Math.round(faker.random().nextInt(3000, 10000) / 100.0) * 100))
+                  .setDepartment(faker.animal().name()) //TODO: improve random department logic
+                  .setState(states[faker.random().nextInt(states.length)]);
 
         switch (randomUser.getState()) {
             case "NCR": {

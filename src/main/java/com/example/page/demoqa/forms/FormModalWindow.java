@@ -12,6 +12,7 @@ import org.testng.Assert;
 import static com.example.driver.DriverManager.waitUtils;
 
 @Getter
+@SuppressWarnings("unused")
 public class FormModalWindow extends AbstractPageObject {
     @FindBy(xpath = "//div[@class='table-responsive']")
     private WebElement modalTable;
@@ -26,12 +27,11 @@ public class FormModalWindow extends AbstractPageObject {
     }
 
     @Step("Check that {key} is: {value}")
-    public FormModalWindow verifyModalResult(String key, String value) {
+    public void verifyModalResult(String key, String value) {
         logger.info("Check that {} is: {}", key, value);
         WebElement parentElement = modalTable.findElement(By.xpath(".//*[text()='" + key + "']/parent::*"));
         String values = parentElement.getText().replace(key, "").trim();
         Assert.assertEquals(values, value);
-        return this;
     }
 
     @Step("Close modal window")

@@ -1,6 +1,6 @@
 package com.example.testcase.zoho;
 
-import com.example.base.BaseTest;
+import com.example.base.AbstractBaseTest;
 import com.example.page.zoho.HomePage;
 import com.example.page.zoho.MainPage;
 import com.example.utilities.LoginTestDataUtils;
@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.example.page.zoho.login.LoginPage;
 
-public class LoginTest extends BaseTest {
+public class LoginTest extends AbstractBaseTest {
     private MainPage mainPage;
     private LoginPage loginPage;
     private HomePage homePage;
