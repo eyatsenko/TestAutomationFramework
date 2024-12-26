@@ -104,6 +104,25 @@ public class ElementsTests extends BaseTest {
         textBoxPage.checkThatEmailFieldIsHighlightedInRed();
     }
 
+    @Test(description = "Check TextBox page filling with all valid data", priority = 7)
+    public void fillCheckBoxPageAllDataTest() {
+        mainPage.openElementsPage();
+
+        textBoxPage = elementsSideBarMenu.clickTextBoxMenuItem();
+
+        textBoxPage.fillFullName(user.getFirstName() + " " + user.getLastName())
+                   .fillEmail(user.getEmail())
+                   .fillCurrentAddress(user.getCurrentAddress())
+                   .fillPermanentAddress(user.getPermanentAddress())
+                   .submitData();
+
+        textBoxPage.checkThatOutputIsDisplayed();
+        textBoxPage.verifyOutputResult("Name", user.getFirstName() + " " + user.getLastName());
+        textBoxPage.verifyOutputResult("Email", user.getEmail());
+        textBoxPage.verifyOutputResult("Current Address", user.getCurrentAddress());
+        textBoxPage.verifyOutputResult("Permanent Address", user.getPermanentAddress());
+    }
+
     @DataProvider(name = "invalidEmailProvider")
     public static Object[][] provideStrings() {
         return new Object[][]{
