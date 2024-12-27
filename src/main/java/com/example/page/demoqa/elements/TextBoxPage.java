@@ -9,6 +9,7 @@ import org.testng.Assert;
 
 import static com.example.driver.DriverManager.waitUtils;
 
+@SuppressWarnings("unused")
 public class TextBoxPage extends AbstractPageObject {
     @FindBy(id = "userName")
     private WebElement fullNameTextBox;

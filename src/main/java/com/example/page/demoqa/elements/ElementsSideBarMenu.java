@@ -7,12 +7,16 @@ import org.openqa.selenium.support.FindBy;
 
 import static com.example.driver.DriverManager.waitUtils;
 
+@SuppressWarnings("unused")
 public class ElementsSideBarMenu extends SidebarMenu {
     @FindBy(xpath = "//span[normalize-space()='Text Box']")
     private WebElement textBoxMenuItem;
 
     @FindBy(xpath = "//span[normalize-space()='Check Box']")
     private WebElement checkBoxMenuItem;
+
+    @FindBy(xpath = "//span[normalize-space()='Web Tables']")
+    private WebElement webTablesMenuItem;
 
     @Step("Click on 'Text Box' item in Sidebar")
     public TextBoxPage clickTextBoxMenuItem() {
@@ -28,5 +32,13 @@ public class ElementsSideBarMenu extends SidebarMenu {
         waitUtils.waitForElementToBeClickable(checkBoxMenuItem);
         checkBoxMenuItem.click();
         return new CheckBoxPage();
+    }
+
+    @Step("Click on 'Web Tables' item in Sidebar")
+    public WebTablesPage clickWebTablesMenuItem() {
+        logger.info("Click on 'Web Tables' item in Sidebar");
+        waitUtils.waitForElementToBeClickable(webTablesMenuItem);
+        webTablesMenuItem.click();
+        return new WebTablesPage();
     }
 }

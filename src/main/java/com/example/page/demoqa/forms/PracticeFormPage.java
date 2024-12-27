@@ -14,6 +14,7 @@ import static com.example.driver.DriverManager.waitUtils;
 import static org.openqa.selenium.Keys.ENTER;
 
 @Getter
+@SuppressWarnings("unused")
 public class PracticeFormPage extends AbstractPageObject {
     @FindBy(id = "firstName")
     private WebElement firstNameField;

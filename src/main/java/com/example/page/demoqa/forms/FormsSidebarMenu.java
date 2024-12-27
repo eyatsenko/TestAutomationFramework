@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import static com.example.driver.DriverManager.waitUtils;
 
 @Getter
+@SuppressWarnings("unused")
 public class FormsSidebarMenu extends AbstractPageObject {
 
     @FindBy(xpath = "//span[normalize-space()='Practice Form']")

@@ -19,7 +19,7 @@ import java.util.Date;
 
 import static com.example.config.ConfigurationManager.configuration;
 
-public abstract class BaseTest {
+public abstract class AbstractBaseTest {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
