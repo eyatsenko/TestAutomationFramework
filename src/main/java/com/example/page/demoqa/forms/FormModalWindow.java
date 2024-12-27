@@ -35,11 +35,10 @@ public class FormModalWindow extends AbstractPageObject {
     }
 
     @Step("Close modal window")
-    public FormModalWindow closeModalWindow() {
+    public void closeModalWindow() {
         logger.info("Close modal window");
         waitUtils.waitForElementToBeClickable(closeModalButton);
         closeModalButton.click();
-        return this;
     }
 
     @Step("Check that Modal Window is displayed")

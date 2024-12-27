@@ -10,6 +10,7 @@ public class User {
     private String gender;
     private String mobileNumber;
     private String dateOfBirth;
+    private String age;
     private String[] subjects;
     private String[] hobbies;
     private String picture;
@@ -104,6 +105,11 @@ public class User {
 
     public User setDepartment(String department) {
         this.department = department;
+        return this;
+    }
+
+    public User setAge(String age) {
+        this.age = age;
         return this;
     }
 }

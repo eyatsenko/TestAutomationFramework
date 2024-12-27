@@ -28,6 +28,7 @@ public class RandomDataUtils {
                   .setGender(sex[faker.random().nextInt(sex.length)])
                   .setMobileNumber(faker.numerify("##########"))
                   .setDateOfBirth("12052015") //TODO: add parsing logic
+                  .setAge(String.valueOf(faker.random().nextInt(18,60))) //TODO: age should be calculated based on DOB
                   .setSubjects(new String[]{subjects[faker.random().nextInt(subjects.length)]})
                   .setHobbies(new String[]{hobbies[faker.random().nextInt(hobbies.length)]})
                   .setPicture(Paths.get("src", "test", "resources", "img.png").toAbsolutePath().toString())
@@ -55,7 +56,6 @@ public class RandomDataUtils {
                 break;
             }
         }
-
         return randomUser;
     }
 }

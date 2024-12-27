@@ -68,7 +68,6 @@ public class RegistrationForm extends AbstractPageObject {
         waitUtils.waitForElementToBeClickable(ageField);
         ageField.sendKeys(age);
         return this;
-        //TODO: add Age into User class and RandomUserGenerator
     }
 
     @Step("Fill salary with value: {salary}")
@@ -79,7 +78,7 @@ public class RegistrationForm extends AbstractPageObject {
         return this;
     }
 
-    @Step("Fill department with value: {department}")
+    @Step("Fill department with value: {departmentName}")
     public RegistrationForm fillDepartment(String departmentName) {
         logger.info("Filling 'Department' field with value: '{}'", departmentName);
         waitUtils.waitForElementToBeClickable(departmentField);

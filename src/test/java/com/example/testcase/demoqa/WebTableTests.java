@@ -38,6 +38,20 @@ public class WebTableTests extends AbstractBaseTest {
                         .fillDepartment(user.getDepartment())
                         .submitUserData();
 
-        //TODO: Add asserts
+        webTablesPage.checkThatRowIsPresentInTheTable(user.getEmail())
+                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "First Name",
+                             user.getFirstName())
+                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Last Name",
+                             user.getLastName())
+                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Email",
+                             user.getEmail())
+                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Age",
+                             user.getAge())
+                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Salary",
+                             user.getSalary())
+                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Department",
+                             user.getDepartment());
     }
+
+    //TODO: Add new tests
 }
