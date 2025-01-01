@@ -19,6 +19,8 @@ public class RandomDataUtils {
         String[] citiesUttar = {"Agra", "Lucknow", "Merrut"};
         String[] citiesHaryana = {"Karnal", "Panipat"};
         String[] citiesRajasthan = {"Jaipur", "Jaiselmer"};
+        String[] departments = {"Human Resources", "Finance", "Information Technology", "Marketing", "Sales",
+                "Operations", "Customer Service", "Research and Development", "Legal", "Procurement"};
 
         randomUser.setFirstName(faker.name().firstName())
                   .setLastName(faker.name().lastName())
@@ -35,7 +37,7 @@ public class RandomDataUtils {
                   .setCurrentAddress(faker.address().fullAddress())
                   .setPermanentAddress(faker.address().fullAddress())
                   .setSalary(String.valueOf(Math.round(faker.random().nextInt(3000, 10000) / 100.0) * 100))
-                  .setDepartment(faker.animal().name()) //TODO: improve random department logic
+                  .setDepartment(departments[faker.random().nextInt(departments.length)])
                   .setState(states[faker.random().nextInt(states.length)]);
 
         switch (randomUser.getState()) {

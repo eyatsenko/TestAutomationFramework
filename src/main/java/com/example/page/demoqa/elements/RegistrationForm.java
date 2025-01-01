@@ -5,6 +5,7 @@ import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import static com.example.driver.DriverManager.waitUtils;
 
@@ -42,6 +43,7 @@ public class RegistrationForm extends AbstractPageObject {
     public RegistrationForm fillFirstName(String firstname) {
         logger.info("Filling 'First Name' field with value: '{}'", firstname);
         waitUtils.waitForElementToBeClickable(firstNameField);
+        firstNameField.clear();
         firstNameField.sendKeys(firstname);
         return this;
     }
@@ -50,6 +52,7 @@ public class RegistrationForm extends AbstractPageObject {
     public RegistrationForm fillLastName(String lastname) {
         logger.info("Filling 'Last Name' field with value: '{}'", lastname);
         waitUtils.waitForElementToBeClickable(lastNameField);
+        lastNameField.clear();
         lastNameField.sendKeys(lastname);
         return this;
     }
@@ -58,6 +61,7 @@ public class RegistrationForm extends AbstractPageObject {
     public RegistrationForm fillEmail(String email) {
         logger.info("Filling 'Email' field with value: '{}'", email);
         waitUtils.waitForElementToBeClickable(userEmailField);
+        userEmailField.clear();
         userEmailField.sendKeys(email);
         return this;
     }
@@ -66,6 +70,7 @@ public class RegistrationForm extends AbstractPageObject {
     public RegistrationForm fillAge(String age) {
         logger.info("Filling 'Age' field with value: '{}'", age);
         waitUtils.waitForElementToBeClickable(ageField);
+        ageField.clear();
         ageField.sendKeys(age);
         return this;
     }
@@ -74,6 +79,7 @@ public class RegistrationForm extends AbstractPageObject {
     public RegistrationForm fillSalary(String salary) {
         logger.info("Filling 'Salary' field with value: '{}'", salary);
         waitUtils.waitForElementToBeClickable(salaryField);
+        salaryField.clear();
         salaryField.sendKeys(salary);
         return this;
     }
@@ -82,6 +88,7 @@ public class RegistrationForm extends AbstractPageObject {
     public RegistrationForm fillDepartment(String departmentName) {
         logger.info("Filling 'Department' field with value: '{}'", departmentName);
         waitUtils.waitForElementToBeClickable(departmentField);
+        departmentField.clear();
         departmentField.sendKeys(departmentName);
         return this;
     }
@@ -98,5 +105,13 @@ public class RegistrationForm extends AbstractPageObject {
         logger.info("Submit user data");
         waitUtils.waitForElementToBeClickable(submitButton);
         submitButton.click();
+    }
+
+    @Step("Check that registration window is opened for valid user: {email}")
+    public RegistrationForm checkThatRegistrationWindowIsOpenedForValidUser(String email) {
+        logger.info("Check that registration window is opened for valid user: {}", email);
+        waitUtils.waitForElementToBeClickable(userEmailField);
+        Assert.assertEquals(userEmailField.getAttribute("value"), email);
+        return this;
     }
 }
