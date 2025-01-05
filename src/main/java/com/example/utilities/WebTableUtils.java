@@ -1,5 +1,6 @@
 package com.example.utilities;
 
+import com.example.enums.Column;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,13 +26,13 @@ public class WebTableUtils {
         return cell.getText();
     }
 
-    public WebElement findRowByCellText(String cellText) {
+    public WebElement findRowByCellText(String expectedCellText) {
         List<WebElement> rows = getAllRows();
         for (int i = 1; i <= rows.size(); i++) {
             WebElement currentRow = table.findElement(By.xpath(".//div[@class='rt-tr-group']" + "[" + i + "]"));
             List<WebElement> cells = currentRow.findElements(By.xpath(".//div[@class='rt-td']"));
             for (WebElement cell : cells) {
-                if (cell.getText().equals(cellText)) {
+                if (cell.getText().equals(expectedCellText)) {
                     return currentRow;
                 }
             }
@@ -39,8 +40,8 @@ public class WebTableUtils {
         return null;
     }
 
-    public void findButtonWithTitleInCell(int row, int column, String title) {
-        WebElement button = table.findElement(By.xpath(".//tbody/tr[" + row + "]/td[" +
-                column + "]//button[@title=" + title + "]"));
+    public WebElement findButtonWithTitleInCell(WebElement row, String columnName, String title) {
+        return row.findElement(By.xpath(".//div[" +
+                Column.getIndexByName(columnName) + "]//span[@title='" + title + "']"));
     }
 }

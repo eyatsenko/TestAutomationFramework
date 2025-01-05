@@ -31,7 +31,6 @@ public abstract class AbstractBaseTest {
     @BeforeMethod(alwaysRun = true)
     @Parameters("browser")
     public void preCondition(@Optional("chrome") String browser) {
-        Allure.step("WebDriver instantiating...");
         WebDriver driver = new TargetFactory().createInstance(browser);
         DriverManager.setDriver(driver);
         DriverManager.getDriver().get(configuration().url());
@@ -50,7 +49,6 @@ public abstract class AbstractBaseTest {
             String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
             Allure.addAttachment("screenshot_" + timestamp, FileUtils.openInputStream(screenshot));
         }
-        Allure.step("WebDriver quiting...");
         DriverManager.quit();
     }
 }

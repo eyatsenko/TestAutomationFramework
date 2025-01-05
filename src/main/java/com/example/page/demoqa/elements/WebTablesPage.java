@@ -1,6 +1,7 @@
 package com.example.page.demoqa.elements;
 
 import com.example.driver.DriverManager;
+import com.example.enums.Column;
 import com.example.page.AbstractPageObject;
 import com.example.utilities.JsUtils;
 import com.example.utilities.WebTableUtils;
@@ -16,33 +17,6 @@ import static com.example.driver.DriverManager.waitUtils;
 @SuppressWarnings("unused")
 public class WebTablesPage extends AbstractPageObject {
 
-    @Getter
-    enum Column {
-        FIRSTNAME(1, "First Name"),
-        LASTNAME(2, "Last Name"),
-        AGE(3, "Age"),
-        EMAIL(4, "Email"),
-        SALARY(5, "Salary"),
-        DEPARTMENT(6, "Department"),
-        ACTION(7, "Action");
-
-        private final int index;
-        private final String name;
-
-        Column(int index, String name) {
-            this.index = index;
-            this.name = name;
-        }
-
-        public static int getIndexByName(String name) {
-            for (Column column : Column.values()) {
-                if (column.getName().equalsIgnoreCase(name)) {
-                    return column.getIndex();
-                }
-            }
-            throw new IllegalArgumentException("No column found with name: " + name);
-        }
-    }
 
     @FindBy(id = "addNewRecordButton")
     private WebElement addButton;
@@ -77,6 +51,17 @@ public class WebTablesPage extends AbstractPageObject {
         return this;
     }
 
+    @Step("Check that row is absent in the table")
+    public WebTablesPage checkThatRowIsAbsentInTheTable(String cellText) {
+        logger.info("Check that row is absent in the table");
+        try {
+            webTableUtils.findRowByCellText(cellText);
+        } catch (Exception e) {
+            Assert.assertTrue(true, "Row is not found by text {cellText}");
+        }
+        return this;
+    }
+
     @Step("Find row by Email: {email}")
     public WebElement findRowInTableByEmail(String email) {
         logger.info("Find row by Email: '{}'", email);
@@ -92,5 +77,18 @@ public class WebTablesPage extends AbstractPageObject {
         return this;
     }
 
+    @Step
+    public RegistrationForm openEditWindowsForRecord(String email) {
+        JsUtils.waitForPageLoad();
+        WebElement row = webTableUtils.findRowByCellText(email);
+        webTableUtils.findButtonWithTitleInCell(row, "Action", "Edit").click();
+        return new RegistrationForm();
+    }
+
+    @Step
+    public void deleteRecordForUserWithEmail(String email) {
+        WebElement row = webTableUtils.findRowByCellText(email);
+        webTableUtils.findButtonWithTitleInCell(row, "Action", "Delete").click();
+    }
     //TODO: add methods and rest of elements
 }
