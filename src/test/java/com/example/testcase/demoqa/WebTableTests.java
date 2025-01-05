@@ -55,7 +55,7 @@ public class WebTableTests extends AbstractBaseTest {
                              user.getDepartment().trim());
     }
 
-    @Test(description = "Check editing an existing record", priority = 2, enabled = false)
+    @Test(description = "Check editing an existing record", priority = 2)
     public void checkEditingExistingRecordTest() {
         mainPage.openElementsPage();
 
@@ -86,7 +86,7 @@ public class WebTableTests extends AbstractBaseTest {
                              user2.getDepartment());
     }
 
-    @Test(description = "Check editing a new record", priority = 3, enabled = false)
+    @Test(description = "Check editing a new record", priority = 3)
     public void checkEditingNewRecordTest() {
         mainPage.openElementsPage();
 
@@ -155,5 +155,6 @@ public class WebTableTests extends AbstractBaseTest {
         webTablesPage.deleteRecordForUserWithEmail(user.getEmail());
         webTablesPage.checkThatRowIsAbsentInTheTable(user.getEmail());
     }
+
     //TODO: Add new tests
 }

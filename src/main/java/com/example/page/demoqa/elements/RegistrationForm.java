@@ -107,7 +107,7 @@ public class RegistrationForm extends AbstractPageObject {
         submitButton.click();
     }
 
-    @Step("Check that registration window is opened for valid user: {email}")
+    @Step("Check that registration window is opened for valid user: '{email}'")
     public RegistrationForm checkThatRegistrationWindowIsOpenedForValidUser(String email) {
         logger.info("Check that registration window is opened for valid user: {}", email);
         waitUtils.waitForElementToBeClickable(userEmailField);

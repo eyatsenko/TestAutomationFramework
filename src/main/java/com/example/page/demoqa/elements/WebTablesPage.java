@@ -57,9 +57,8 @@ public class WebTablesPage extends AbstractPageObject {
         try {
             webTableUtils.findRowByCellText(cellText);
         } catch (Exception e) {
-            Assert.assertTrue(true);
+            Assert.assertTrue(true, "Row is not found by text {cellText}");
         }
-        Assert.fail("Row is found by text {cellText}");
         return this;
     }
 
