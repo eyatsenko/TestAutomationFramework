@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import java.text.ParseException;
+import java.util.Arrays;
 
 import static com.example.driver.DriverManager.waitUtils;
 import static org.openqa.selenium.Keys.ENTER;
@@ -142,8 +143,8 @@ public class PracticeFormPage extends AbstractPageObject {
     }
 
     @Step("Fill Subjects: {subjects}")
-    public PracticeFormPage fillSubjects(String[] subjects) {
-        logger.info("Filling 'Subjects' field with value: '{}'", subjects);
+    public PracticeFormPage fillSubjects(String ... subjects) {
+        logger.info("Filling 'Subjects' field with value: '{}'", Arrays.toString(subjects));
         for (String subject : subjects) {
             subjectsInput.sendKeys(subject);
             subjectsInput.sendKeys(ENTER);
@@ -152,8 +153,8 @@ public class PracticeFormPage extends AbstractPageObject {
     }
 
     @Step("Select Hobbies: {hobbies}")
-    public PracticeFormPage selectHobbies(String[] hobbies) {
-        logger.info("Filling 'Hobbies' field with value: '{}'", hobbies);
+    public PracticeFormPage selectHobbies(String ... hobbies) {
+        logger.info("Filling 'Hobbies' field with value: '{}'", Arrays.toString(hobbies));
         for (String hobby : hobbies) {
             switch (hobby) {
                 case "Sports": {
@@ -166,7 +167,6 @@ public class PracticeFormPage extends AbstractPageObject {
                 }
                 case "Reading": {
                     waitUtils.waitForElementToBeClickable(readingCheckBox);
-                    readingCheckBox.click();
                     if (!isReadingSelected) {
                         readingCheckBox.click();
                         isReadingSelected = true;

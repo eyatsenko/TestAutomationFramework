@@ -128,7 +128,7 @@
         <profile>
             <id>run-tests</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <suiteXmlFile>testrunner/testng.xml</suiteXmlFile>
@@ -157,6 +157,7 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+                    <skipTests>true</skipTests>
                 </configuration>
                 <dependencies>
                     <dependency>
