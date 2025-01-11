@@ -136,14 +136,14 @@ public class PracticeFormPage extends AbstractPageObject {
     }
 
     @Step("Set DOB")
-    public PracticeFormPage setDateOfBirth(int day, String month, int year) throws ParseException {
-        logger.info("Filling 'DOB' field with value: '{}'", year);
+    public PracticeFormPage setDateOfBirth(String day, String month, String year) throws ParseException {
+        logger.info("Filling 'DOB' field with value: '{}, {}, {}'", day, month, year);
         openCalendar().setDate(day, month, year);
         return this;
     }
 
     @Step("Fill Subjects: {subjects}")
-    public PracticeFormPage fillSubjects(String ... subjects) {
+    public PracticeFormPage fillSubjects(String... subjects) {
         logger.info("Filling 'Subjects' field with value: '{}'", Arrays.toString(subjects));
         for (String subject : subjects) {
             subjectsInput.sendKeys(subject);
@@ -153,7 +153,7 @@ public class PracticeFormPage extends AbstractPageObject {
     }
 
     @Step("Select Hobbies: {hobbies}")
-    public PracticeFormPage selectHobbies(String ... hobbies) {
+    public PracticeFormPage selectHobbies(String... hobbies) {
         logger.info("Filling 'Hobbies' field with value: '{}'", Arrays.toString(hobbies));
         for (String hobby : hobbies) {
             switch (hobby) {

@@ -4,15 +4,17 @@ import com.example.models.User;
 import com.github.javafaker.Faker;
 
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.stream.Stream;
 
 public class RandomDataUtils {
+    static Faker faker = new Faker();
 
     public static User getRandomUser() {
-        Faker faker = new Faker();
         User randomUser = new User();
         String[] subjects = {"Maths", "Arts", "History", "Accounting", "Biology", "Physics", "Computer Science",
                 "Commerce", "Chemistry", "Civics", "Hindi", "Social Studies", "English"};
-        String[] sex = {"Male", "Female"};
+        String[] sex = {"Male", "Female", "Other"};
         String[] hobbies = {"Sports", "Reading", "Music"};
         String[] states = {"NCR", "Uttar Pradesh", "Haryana", "Rajasthan"};
         String[] citiesNCR = {"Delhi", "Gurgaon", "Noida"};
@@ -27,18 +29,20 @@ public class RandomDataUtils {
                   .setUsername((randomUser.getFirstName() + randomUser.getLastName()).toLowerCase())
                   .setPassword("Test!12345")
                   .setEmail((randomUser.getFirstName() + "." + randomUser.getLastName()).toLowerCase() + "@fakemail.xyz")
-                  .setGender(sex[faker.random().nextInt(sex.length)])
+                  .setGender(Stream.of(sex).findAny().get())
                   .setMobileNumber(faker.numerify("##########"))
-                  .setDateOfBirth("12052015") //TODO: add parsing logic
-                  .setAge(String.valueOf(faker.random().nextInt(18,60))) //TODO: age should be calculated based on DOB
-                  .setSubjects(new String[]{subjects[faker.random().nextInt(subjects.length)]})
-                  .setHobbies(new String[]{hobbies[faker.random().nextInt(hobbies.length)]})
+                  .setDayOfBirth(String.valueOf(faker.number().numberBetween(1, 30)))
+                  .setMonthOfBirth(String.valueOf(faker.number().numberBetween(1, 12)))
+                  .setYearOfBirth(String.valueOf(faker.number().numberBetween(1950, 2000)))
+                  .setAge(String.valueOf(LocalDate.now().getYear() - Integer.parseInt(randomUser.getYearOfBirth())))
+                  .setSubjects(new String[] {Stream.of(subjects).findAny().get()})
+                  .setHobbies(new String[]{Stream.of(hobbies).findAny().get()})
                   .setPicture(Paths.get("src", "test", "resources", "img.png").toAbsolutePath().toString())
                   .setCurrentAddress(faker.address().fullAddress())
                   .setPermanentAddress(faker.address().fullAddress())
-                  .setSalary(String.valueOf(Math.round(faker.random().nextInt(3000, 10000) / 100.0) * 100))
-                  .setDepartment(departments[faker.random().nextInt(departments.length)])
-                  .setState(states[faker.random().nextInt(states.length)]);
+                  .setSalary(String.valueOf(faker.number().numberBetween(3000, 10000)))
+                  .setDepartment(Stream.of(departments).findAny().get())
+                  .setState(Stream.of(states).findAny().get());
 
         switch (randomUser.getState()) {
             case "NCR": {

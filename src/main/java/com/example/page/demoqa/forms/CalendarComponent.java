@@ -26,7 +26,7 @@ public class CalendarComponent extends AbstractPageObject {
     private WebElement yearDatePicker;
 
     @Step("Fill Date of birth")
-    public void setDate(int day, String month, int year) throws ParseException {
+    public void setDate(String day, String month, String year) throws ParseException {
         Select yearSelect = new Select(yearDatePicker);
         Select monthSelect = new Select(monthDatePicker);
 
@@ -34,8 +34,7 @@ public class CalendarComponent extends AbstractPageObject {
         yearSelect.selectByValue(String.valueOf(year));
 
         waitUtils.waitForElementToBeClickable(monthDatePicker);
-        monthSelect.selectByVisibleText(TimeFormatUtils
-                .getFullFormatMonth(String.valueOf(day), String.valueOf(month), String.valueOf(year)));
+        monthSelect.selectByVisibleText(TimeFormatUtils.getFullFormatMonth(month));
 
         waitUtils.waitForElementToBeClickable(DriverManager.getDriver().findElement(
                 By.xpath("//*[contains(@class, 'react-datepicker__day--0" + day + "') " +

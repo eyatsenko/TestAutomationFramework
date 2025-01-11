@@ -6,12 +6,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class TimeFormatUtils {
-    public static String getFullFormatMonth(String day, String month, String year) throws ParseException {
-        SimpleDateFormat oldDateFormat = new SimpleDateFormat("d MMM yyyy", Locale.US);
-        SimpleDateFormat newDateFormat = new SimpleDateFormat("dd MMMMM yyyy", Locale.US);
-        StringBuilder date = new StringBuilder();
-        date.append(day).append(" ").append(month).append(" ").append(year);
-        List<String> newFormatDate = List.of(newDateFormat.format(oldDateFormat.parse(date.toString())).split(" "));
-        return newFormatDate.get(1);
+    public static String getFullFormatMonth(String month) throws ParseException {
+        SimpleDateFormat oldMonthFormat = new SimpleDateFormat("MM", Locale.US);
+        SimpleDateFormat newMonthFormat = new SimpleDateFormat("MMMMM", Locale.US);
+        List<String> newFormatDate = List.of(newMonthFormat.format(oldMonthFormat.parse(month)).split(" "));
+        return newFormatDate.getFirst();
     }
 }
