@@ -10,6 +10,9 @@ public class User {
     private String gender;
     private String mobileNumber;
     private String dateOfBirth;
+    private String dayOfBirth;
+    private String monthOfBirth;
+    private String yearOfBirth;
     private String age;
     private String[] subjects;
     private String[] hobbies;
@@ -110,6 +113,27 @@ public class User {
 
     public User setAge(String age) {
         this.age = age;
+        return this;
+    }
+
+    public User setDayOfBirth(String day) {
+        if (day.length() == 1) {
+            day = "0" + day;
+        }
+        this.dayOfBirth = day;
+        return this;
+    }
+
+    public User setMonthOfBirth(String month) {
+        if (month.length() == 1) {
+            month = "0" + month;
+        }
+        this.monthOfBirth = month;
+        return this;
+    }
+
+    public User setYearOfBirth(String year) {
+        this.yearOfBirth = year;
         return this;
     }
 }

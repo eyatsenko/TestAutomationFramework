@@ -7,6 +7,7 @@ import com.example.page.demoqa.forms.PracticeFormPage;
 import com.example.page.demoqa.forms.FormModalWindow;
 import com.example.page.demoqa.forms.FormsSidebarMenu;
 import com.example.utilities.RandomDataUtils;
+import com.example.utilities.TimeFormatUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -40,7 +41,7 @@ public class FormsTests extends AbstractBaseTest {
                 .fillEmail(user.getEmail())
                 .selectGender(user.getGender())
                 .fillNumber(user.getMobileNumber())
-                .setDateOfBirth(12, "May", 2015)
+                .setDateOfBirth(user.getDayOfBirth(), user.getMonthOfBirth(), user.getYearOfBirth())
                 .fillSubjects(user.getSubjects())
                 .selectHobbies(user.getHobbies())
                 .uploadPicture(user.getPicture())
@@ -55,7 +56,8 @@ public class FormsTests extends AbstractBaseTest {
         formModalWindow.verifyModalResult("Student Email", user.getEmail());
         formModalWindow.verifyModalResult("Gender", user.getGender());
         formModalWindow.verifyModalResult("Mobile", user.getMobileNumber());
-        formModalWindow.verifyModalResult("Date of Birth", "12 May,2015");
+        formModalWindow.verifyModalResult("Date of Birth", user.getDayOfBirth() + " " + TimeFormatUtils
+                .getFullFormatMonth(user.getMonthOfBirth()) + "," + user.getYearOfBirth());
         formModalWindow.verifyModalResult("Subjects", (String.join(", ", user.getSubjects())));
         formModalWindow.verifyModalResult("Hobbies", (String.join(", ", user.getHobbies())));
         formModalWindow.verifyModalResult("Picture", Paths.get(user.getPicture()).getFileName().toString());
@@ -75,7 +77,7 @@ public class FormsTests extends AbstractBaseTest {
                 .fillLastName(user.getLastName())
                 .selectGender(user.getGender())
                 .fillNumber(user.getMobileNumber())
-                .setDateOfBirth(12, "May", 2015)
+                .setDateOfBirth(user.getDayOfBirth(), user.getMonthOfBirth(), user.getYearOfBirth())
                 .submitForm();
 
         formModalWindow.checkThatModalWindowIsDisplayed();
@@ -84,7 +86,8 @@ public class FormsTests extends AbstractBaseTest {
         formModalWindow.verifyModalResult("Student Email", "");
         formModalWindow.verifyModalResult("Gender", user.getGender());
         formModalWindow.verifyModalResult("Mobile", user.getMobileNumber());
-        formModalWindow.verifyModalResult("Date of Birth", "12 May,2015");
+        formModalWindow.verifyModalResult("Date of Birth", user.getDayOfBirth() + " " + TimeFormatUtils
+                .getFullFormatMonth(user.getMonthOfBirth()) + "," + user.getYearOfBirth());
         formModalWindow.verifyModalResult("Subjects", "");
         formModalWindow.verifyModalResult("Hobbies", "");
         formModalWindow.verifyModalResult("Picture", "");
@@ -104,7 +107,7 @@ public class FormsTests extends AbstractBaseTest {
                 .fillEmail(user.getEmail())
                 .selectGender(user.getGender())
                 .fillNumber(user.getMobileNumber())
-                .setDateOfBirth(12, "May", 2015)
+                .setDateOfBirth(user.getDayOfBirth(), user.getMonthOfBirth(), user.getYearOfBirth())
                 .fillSubjects(user.getSubjects())
                 .selectHobbies(user.getHobbies())
                 .uploadPicture(user.getPicture())
@@ -127,7 +130,7 @@ public class FormsTests extends AbstractBaseTest {
                 .fillEmail(user.getEmail())
                 .selectGender(user.getGender())
                 .fillNumber(user.getMobileNumber())
-                .setDateOfBirth(12, "May", 2015)
+                .setDateOfBirth(user.getDayOfBirth(), user.getMonthOfBirth(), user.getYearOfBirth())
                 .fillSubjects(user.getSubjects())
                 .selectHobbies(user.getHobbies())
                 .uploadPicture(user.getPicture())
@@ -150,7 +153,7 @@ public class FormsTests extends AbstractBaseTest {
                 .fillLastName(user.getLastName())
                 .fillEmail(user.getEmail())
                 .selectGender(user.getGender())
-                .setDateOfBirth(12, "May", 2015)
+                .setDateOfBirth(user.getDayOfBirth(), user.getMonthOfBirth(), user.getYearOfBirth())
                 .fillSubjects(user.getSubjects())
                 .selectHobbies(user.getHobbies())
                 .uploadPicture(user.getPicture())
