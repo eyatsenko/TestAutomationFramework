@@ -1,9 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="Regression Suite">
-    <test name="Regression Tests" parallel="none" verbose="0">
+    <test name="DemoQA Tests" parallel="none" verbose="0">
         <classes>
             <class name="com.example.testcase.demoqa.FormsTests"/>
-<!--            <class name="com.example.testcase.demoqa.LoginPageTests"/>-->
+            <class name="com.example.testcase.demoqa.LoginPageTests"/>
+            <class name="com.example.testcase.demoqa.ElementsTests"/>
+            <class name="com.example.testcase.demoqa.WebTableTests"/>
         </classes>
     </test>
 </suite>
