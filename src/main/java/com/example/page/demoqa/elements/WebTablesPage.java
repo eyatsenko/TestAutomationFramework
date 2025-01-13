@@ -77,6 +77,66 @@ public class WebTablesPage extends AbstractPageObject {
         return this;
     }
 
+    @Step("Check that First Name is: {cellValue}")
+    public WebTablesPage verifyFirstNameValue(String email, String cellValue) {
+        logger.info("Check that First Name is : '{}'", cellValue);
+        String actualValue = webTableUtils.getCellValueForColumn(this.findRowInTableByEmail(email),
+                Column.getIndexByName("First Name"));
+        Assert.assertEquals(actualValue, cellValue, "FirstName is: '" + actualValue
+                + "', but should be '" + cellValue + "'!");
+        return this;
+    }
+
+    @Step("Check that Last Name is: {cellValue}")
+    public WebTablesPage verifyLastNameValue(String email, String cellValue) {
+        logger.info("Check that Last Name is : '{}'", cellValue);
+        String actualValue = webTableUtils.getCellValueForColumn(this.findRowInTableByEmail(email),
+                Column.getIndexByName("Last Name"));
+        Assert.assertEquals(actualValue, cellValue, "LastName is: '" + actualValue
+                + "', but should be '" + cellValue + "'!");
+        return this;
+    }
+
+    @Step("Check that Email is: {cellValue}")
+    public WebTablesPage verifyEmailValue(String email, String cellValue) {
+        logger.info("Check that Email is : '{}'", cellValue);
+        String actualValue = webTableUtils.getCellValueForColumn(this.findRowInTableByEmail(email),
+                Column.getIndexByName("Email"));
+        Assert.assertEquals(actualValue, cellValue, "Email is: '" + actualValue
+                + "', but should be '" + cellValue + "'!");
+        return this;
+    }
+
+    @Step("Check that Age is: {cellValue}")
+    public WebTablesPage verifyAgeValue(String email, String cellValue) {
+        logger.info("Check that Age is : '{}'", cellValue);
+        String actualValue = webTableUtils.getCellValueForColumn(this.findRowInTableByEmail(email),
+                Column.getIndexByName("Age"));
+        Assert.assertEquals(actualValue, cellValue, "Age is: '" + actualValue
+                + "', but should be '" + cellValue + "'!");
+        return this;
+    }
+
+    @Step("Check that Salary is: {cellValue}")
+    public WebTablesPage verifySalaryValue(String email, String cellValue) {
+        logger.info("Check that Salary is : '{}'", cellValue);
+        String actualValue = webTableUtils.getCellValueForColumn(this.findRowInTableByEmail(email),
+                Column.getIndexByName("Salary"));
+        Assert.assertEquals(actualValue, cellValue, "Salary is: '" + actualValue
+                + "', but should be '" + cellValue + "'!");
+        return this;
+    }
+
+    @Step("Check that Department is: {cellValue}")
+    public WebTablesPage verifyDepartmentValue(String email, String cellValue) {
+        logger.info("Check that Department is : '{}'", cellValue);
+        String actualValue = webTableUtils.getCellValueForColumn(this.findRowInTableByEmail(email),
+                Column.getIndexByName("Department"));
+        Assert.assertEquals(actualValue, cellValue, "Department is: '" + actualValue
+                + "', but should be '" + cellValue + "'!");
+        return this;
+    }
+
     @Step
     public RegistrationForm openEditWindowsForRecord(String email) {
         JsUtils.waitForPageLoad();
@@ -86,9 +146,9 @@ public class WebTablesPage extends AbstractPageObject {
     }
 
     @Step
-    public void deleteRecordForUserWithEmail(String email) {
+    public WebTablesPage deleteRecordForUserWithEmail(String email) {
         WebElement row = webTableUtils.findRowByCellText(email);
         webTableUtils.findButtonWithTitleInCell(row, "Action", "Delete").click();
+        return this;
     }
-    //TODO: add methods and rest of elements
 }
