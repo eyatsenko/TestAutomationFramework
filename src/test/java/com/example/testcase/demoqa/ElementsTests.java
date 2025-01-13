@@ -15,6 +15,7 @@ public class ElementsTests extends AbstractBaseTest {
     private TextBoxPage textBoxPage;
     private CheckBoxPage checkBoxPage;
     private User user;
+    private ButtonsPage buttonPage;
 
     @BeforeMethod
     public void setUp() {
@@ -113,6 +114,36 @@ public class ElementsTests extends AbstractBaseTest {
         checkBoxPage.selectOneNode(nodeName);
 
         checkBoxPage.checkThatNodeIsSelected(nodeName);
+    }
+
+    @Test(description = "Check double click", priority = 8)
+    public void checkDoubleClickTest() {
+        mainPage.openElementsPage();
+
+        buttonPage = elementsSideBarMenu.clickButtonsMenuItem();
+        buttonPage.clickOnDoubleClickButton();
+
+        buttonPage.checkThatDoubleClickIsPerformed();
+    }
+
+    @Test(description = "Check right click", priority = 9)
+    public void checkRightClickTest() {
+        mainPage.openElementsPage();
+
+        buttonPage = elementsSideBarMenu.clickButtonsMenuItem();
+        buttonPage.clickOnRightClickButton();
+
+        buttonPage.checkThatRightClickIsPerformed();
+    }
+
+    @Test(description = "Check dynamic click", priority = 10)
+    public void checkDynamicClickTest() {
+        mainPage.openElementsPage();
+
+        buttonPage = elementsSideBarMenu.clickButtonsMenuItem();
+        buttonPage.clickOnClickButton();
+
+        buttonPage.checkThatDynamicClickIsPerformed();
     }
 
     @DataProvider(name = "invalidEmailProvider")
