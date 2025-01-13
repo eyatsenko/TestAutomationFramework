@@ -18,6 +18,9 @@ public class ElementsSideBarMenu extends SidebarMenu {
     @FindBy(xpath = "//span[normalize-space()='Web Tables']")
     private WebElement webTablesMenuItem;
 
+    @FindBy(xpath = "//span[normalize-space()='Buttons']")
+    private WebElement buttonsMenuItem;
+
     @Step("Click on 'Text Box' item in Sidebar")
     public TextBoxPage clickTextBoxMenuItem() {
         logger.info("Click on 'Text Box' item in Sidebar");
@@ -40,5 +43,12 @@ public class ElementsSideBarMenu extends SidebarMenu {
         waitUtils.waitForElementToBeClickable(webTablesMenuItem);
         webTablesMenuItem.click();
         return new WebTablesPage();
+    }
+
+    public ButtonsPage clickButtonsMenuItem() {
+        logger.info("Click on 'Buttons' item in Sidebar");
+        waitUtils.waitForElementToBeClickable(buttonsMenuItem);
+        buttonsMenuItem.click();
+        return new ButtonsPage();
     }
 }
