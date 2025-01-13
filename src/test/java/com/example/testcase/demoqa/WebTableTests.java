@@ -41,18 +41,12 @@ public class WebTableTests extends AbstractBaseTest {
                         .submitUserData();
 
         webTablesPage.checkThatRowIsPresentInTheTable(user.getEmail())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "First Name",
-                             user.getFirstName())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Last Name",
-                             user.getLastName())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Email",
-                             user.getEmail())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Age",
-                             user.getAge())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Salary",
-                             user.getSalary())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Department",
-                             user.getDepartment().trim());
+                     .verifyFirstNameValue(user.getEmail(), user.getFirstName())
+                     .verifyLastNameValue(user.getEmail(), user.getLastName())
+                     .verifyEmailValue(user.getEmail(), user.getEmail())
+                     .verifyAgeValue(user.getEmail(), user.getAge())
+                     .verifySalaryValue(user.getEmail(), user.getSalary())
+                     .verifyDepartmentValue(user.getEmail(), user.getDepartment());
     }
 
     @Test(description = "Check editing an existing record", priority = 2)
@@ -72,18 +66,12 @@ public class WebTableTests extends AbstractBaseTest {
                         .submitUserData();
 
         webTablesPage.checkThatRowIsPresentInTheTable(user2.getEmail())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "First Name",
-                             user2.getFirstName())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "Last Name",
-                             user2.getLastName())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "Email",
-                             user2.getEmail())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "Age",
-                             user2.getAge())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "Salary",
-                             user2.getSalary())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "Department",
-                             user2.getDepartment());
+                     .verifyFirstNameValue(user2.getEmail(), user2.getFirstName())
+                     .verifyLastNameValue(user2.getEmail(), user2.getLastName())
+                     .verifyEmailValue(user2.getEmail(), user2.getEmail())
+                     .verifyAgeValue(user2.getEmail(), user2.getAge())
+                     .verifySalaryValue(user2.getEmail(), user2.getSalary())
+                     .verifyDepartmentValue(user2.getEmail(), user2.getDepartment());
     }
 
     @Test(description = "Check editing a new record", priority = 3)
@@ -111,18 +99,12 @@ public class WebTableTests extends AbstractBaseTest {
                         .submitUserData();
 
         webTablesPage.checkThatRowIsPresentInTheTable(user2.getEmail())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "First Name",
-                             user2.getFirstName())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "Last Name",
-                             user2.getLastName())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "Email",
-                             user2.getEmail())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "Age",
-                             user2.getAge())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "Salary",
-                             user2.getSalary())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user2.getEmail()), "Department",
-                             user2.getDepartment());
+                     .verifyFirstNameValue(user2.getEmail(), user2.getFirstName())
+                     .verifyLastNameValue(user2.getEmail(), user2.getLastName())
+                     .verifyEmailValue(user2.getEmail(), user2.getEmail())
+                     .verifyAgeValue(user2.getEmail(), user2.getAge())
+                     .verifySalaryValue(user2.getEmail(), user2.getSalary())
+                     .verifyDepartmentValue(user2.getEmail(), user2.getDepartment());
     }
 
     @Test(description = "Check deleting an existing record", priority = 4)
@@ -140,21 +122,14 @@ public class WebTableTests extends AbstractBaseTest {
                         .submitUserData();
 
         webTablesPage.checkThatRowIsPresentInTheTable(user.getEmail())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "First Name",
-                             user.getFirstName())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Last Name",
-                             user.getLastName())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Email",
-                             user.getEmail())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Age",
-                             user.getAge())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Salary",
-                             user.getSalary())
-                     .verifyCellValueInRow(webTablesPage.findRowInTableByEmail(user.getEmail()), "Department",
-                             user.getDepartment());
-        webTablesPage.deleteRecordForUserWithEmail(user.getEmail());
-        webTablesPage.checkThatRowIsAbsentInTheTable(user.getEmail());
-    }
+                     .verifyFirstNameValue(user.getEmail(), user.getFirstName())
+                     .verifyLastNameValue(user.getEmail(), user.getLastName())
+                     .verifyEmailValue(user.getEmail(), user.getEmail())
+                     .verifyAgeValue(user.getEmail(), user.getAge())
+                     .verifySalaryValue(user.getEmail(), user.getSalary())
+                     .verifyDepartmentValue(user.getEmail(), user.getDepartment());
 
-    //TODO: Add new tests
+        webTablesPage.deleteRecordForUserWithEmail(user.getEmail())
+                     .checkThatRowIsAbsentInTheTable(user.getEmail());
+    }
 }
