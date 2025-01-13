@@ -62,9 +62,7 @@ public class WebTablesPage extends AbstractPageObject {
         return this;
     }
 
-    @Step("Find row by Email: {email}")
     public WebElement findRowInTableByEmail(String email) {
-        logger.info("Find row by Email: '{}'", email);
         return webTableUtils.findRowByCellText(email);
     }
 
